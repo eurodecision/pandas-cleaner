@@ -1,5 +1,5 @@
 
-.. image:: https://edgitlab.eurodecision.com/data/pandas-cleaner/-/raw/dev/docs/source/pandas-cleaner.png
+.. image:: https://github.com/eurodecision/pandas-cleaner/blob/master/docs/source/pandas-cleaner.png
 
 ------
 
@@ -127,4 +127,4 @@ Contributing to pandas-cleaner
 
 All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
 
-Issues and bugs can be reported at https://edgitlab.eurodecision.com/data/pandas-cleaner/-/issues
+Issues and bugs can be reported at https://github.com/eurodecision/pandas-cleaner/issues

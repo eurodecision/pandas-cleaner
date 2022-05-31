@@ -23,14 +23,14 @@ setuptools.setup(
     description="A pandas extension for cleaning datasets.",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    url="https://edgitlab.eurodecision.com/data/pandas-cleaner",
+    url="https://github.com/eurodecision/pandas-cleaner",
     project_urls={
         "Documentation":
-        "https://edgitlab.eurodecision.com/data/pandas-cleaner/-/blob/dev/README.rst",
+        "https://github.com/eurodecision/pandas-cleaner/blob/master/README.rst",
         "Source Code":
-        "https://edgitlab.eurodecision.com/data/pandas-cleaner",
+        "https://github.com/eurodecision/pandas-cleaner",
         "Bug Tracker":
-        "https://edgitlab.eurodecision.com/data/pandas-cleaner/-/issues"
+        "https://github.com/eurodecision/pandas-cleaner/issues"
     },
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -42,7 +42,7 @@ setuptools.setup(
         "Topic :: Software Development",
         "Topic :: Scientific/Engineering",
     ],
-    #package_dir={"pdcleaner": "pdcleaner"},
+
     packages=setuptools.find_packages(where="."),
     python_requires=">=3.6",
     setup_requires=["wheel"],
