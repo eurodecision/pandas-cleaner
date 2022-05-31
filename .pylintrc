@@ -1,0 +1,4 @@
+[FORMAT]
+max-line-length = 100
+disable = R0913, R0902  # R0913: Too many arguments
+                        # R0902: too many instance attributes

@@ -1,0 +1,2 @@
+Handling categorical series
+===========================

@@ -1,0 +1,31 @@
+# editor/temporary files
+.vscode/
+.ipynb_checkpoints/
+.idea/
+
+#compiled sources
+*.py[ocd]
+__pycache__
+
+#build
+build/
+dist/
+api/
+
+# Egg metadata
+*.egg-info
+.eggs
+.pypirc
+
+#doc sphinx
+api/
+build/
+
+notebooks/
+
+#virtual envs
+env/
+venv/
+
+htmlcov/
+.coverage

@@ -1,0 +1,2 @@
+Handling gaussian series 
+========================

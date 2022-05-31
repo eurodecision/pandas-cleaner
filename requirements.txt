@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+# mandatory
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+requests
+
+# doc
+sphinx
+m2r2
+pydata-sphinx-theme
+sphinx-copybutton
+nbsphinx
+sphinx-automodapi
+
+# Linters
+pylint
+flake8
+bandit
+
+# tests
+pytest
+pytest-cov

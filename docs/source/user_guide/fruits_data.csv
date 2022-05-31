@@ -1,0 +1,101 @@
+,category,price(euro),diameter(cm),weight(kg),pesticide_content(mg/kg),variety
+0,navet,,13.4,0.76,0.00525,de Nancy
+1,pomme,-2.53,6.5,0.095,0.00571,"granny,"
+2,pomme,2.96,6.9,0.153,0.0086,golden
+3,Pomme,2.23,63,0.112,0.00473,Granny
+4,pomme,3.18,8.9,0.304,0.0039,granny
+5,pomme,4.85,7.6,212,0.00567,granny
+6,pomme,4.43,6.6,0.126,0.00465,granny
+7,pomme,55,6,0.102,0.00594,granny
+8,cerise,7.3,2.7,0.006,0.0071,bigarrau
+9,cerise,7.24,2.1,0.002,0,amarelles
+10,cerise,6.54,3.6,0.015,0.00992,amarelles
+11,cerise,7.1,2.4,0.005,0.00807,bigarreaux
+12,cerise,8.67,1.5,0.002,0.0064,amarelles
+13,cerise,4.85,7.6,0.212,0.00567,granny
+14,cerise,644,22,4,56,bigarreaux
+15,navet,0.69,14.2,0.904,0,de Milan
+16,navet,0.97,9.8,0.262,0.0056,de Nancy
+17,pomme,4.17,8.1,0.247,0.00453,golden
+18,navet,2.44,6.5,0.087,0.00656,"de, Milan"
+19,pomme,2.4,5.7,0.074,0.00831,granny
+20,pomme,3.47,7.6,0.222,0,granny
+21,pomme,3.45,5.9,0.073,0.00693,golden
+22,pomme,5.18,7.9,0.221,0,granny
+23,pomme,3.31,7,0.18,0.00205,granny
+24,cerise,13.15,1.7,0.002,0.00714,bigarreaux
+25,pomme,4.58,8.5,0.287,0.00651,golden
+26,cerise,9.69,1,0,0.00706,bigarreaux
+27,pomme,6.36,8,0.233,0.00573,granny
+28,cerise,9.12,3.7,0.017,0.00501,bigarreaux
+29,pomme,4.14,6.1,0.11,0.00528,golden2
+30,cerise,9.01,1.8,0.002,0,amarelles
+31,cerise,7.28,2.4,0.004,0.00303,amarelles
+32,pomme,3.57,7.5,0.179,0.00611,granny
+33,pomme,2.73,7.1,0.173,0.00605,golden
+34,cerise,4.99,7,0.01,0.00552,bigarreaux
+35,navet,2.81,12.1,0.533,0.00474,de Nancy
+36,pomme,3.08,7,0.177,0.00721,golden
+37,pomme,2.24,9.4,0.7,0.00508,granny
+38,navet,1.82,4,0.034,0,de.Milan
+39,navet,2.2,4.2,0.052,0.00642,de Milan
+40,pomme,3.69,5.5,0.074,0.00611,golden
+41,navet,2.42,12.1,0.545,0,de milan
+42,pomme,3.07,6.6,0.128,0.00442,golden
+43,pomme,-5.65,8.9,0.305,0.0016,granny
+44,pomme,5.8,5.8,0.094,0.00576,golden
+45,navet,2.53,7.7,0.156,0.00632,Milan de
+46,pomme,1.15,6.3,0.115,0.00822,granny
+47,pomme,2.48,6.4,0.101,0.00404,granny
+48,cerise,14.64,1,0.001,0.00569,amarelles
+49,cerise,10.61,3.4,0.013,0.00615,bigarreaux
+50,pomme,1.67,6.3,0.103,0.00502,granny
+51,pomme,0.87,7.4,0.173,0.00451,golden
+52,navet,0.79,6.2,0.069,0.00488,de Nancy
+53,pomme,4.71,7.9,0.241,0.00504,golden
+54,cerise,12.67,1.8,0.001,0.00569,bigarreaux
+55,navet,0.54,9,0.242,0.00504,DE NANCY
+56,navet,0.46,7.6,0.131,0.00517,de Milan
+57,cerise,9.85,2.6,0.005,0.0072,bigarreaux
+58,cerise,12.41,2.8,0.008,0.00796,bigarreaux
+59,cerise,8.7,3,0.01,0.00501,amarelles
+60,cerise,8.96,2.1,0.003,0.00487,bigarreaux
+61,navet,2.6,6.8,-0.103,0.00852,de Milan
+62,cerise,10.52,2.7,0.006,0.00364,amarelles
+63,cerise,11.13,2.4,0.005,0.00673,amarelles
+64,cerise,8.01,1.9,0.003,0.00554,amarelles
+65,navet,1.9,10.1,0.334,0.00368,de Nancy
+66,pomme,3.22,8.9,0.322,0.00497,granny
+67,pomme,3.6,6,0.087,0.00577,golden
+68,pomme,1.66,6.9,-0.151,0.00291,golden
+69,cerise,6.52,2.1,0.002,0.00594,amarelles
+70,pomme,4.77,5.9,0.077,0.00538,golden
+71,cerise,8.22,2.6,0.005,0.00541,amarelles
+72,pomme,4.09,7.9,0.222,0.00486,golden
+73,cerise,7.85,2.7,0.06,0.00494,bigarreaux
+74,pomme,1.23,6.2,0.101,0,granny
+75,cerise,-5.07,1.9,0.002,0,amarelles
+76,cerise,6.11,2.4,0.005,0.000445,amarelles
+77,pomme,0.82,6.9,0.145,0.00538,granny
+78,cerise,10.42,1.8,0.002,0.00395,bigarreaux
+79,cerise,7.8,2.6,0.005,0.00777,bigarreaux
+80,pomme,4.83,7.3,0.165,0.00342,granny
+81,pomme,2.46,6.6,0.134,0.0077,granny
+82,cerise,4.99,3,0.008,0.0069,amarelles
+83,navet,0.9,13.5,0.75,0.0067,de Nancy
+84,pomme,4.46,5.8,0.072,0.00404,golden
+85,pomme,1.69,6.2,0.111,0,granny
+86,cerise,6.77,2.6,0.005,0.00419,bigarreaux
+87,pomme,3.62,8.5,0.269,0.00597,golden
+88,pomme,4.3,7.3,0.165,0.000814,golden
+89,pomme,1.78,7.9,0.209,0.00704,golden
+90,cerise,7.87,1.7,0.001,0.011,bigarreaux
+91,pomme,2.69,6.8,0.143,0.00627,golden
+92,cerise,8.38,2,0.003,0.00832,amarelles
+93,pomme,2.46,8.9,0.304,0.00848,granny
+94,pomme,3.58,8.7,0.282,0.00735,golden
+95,pomme,1.53,8.9,0.29,0.00741,granny
+96,pomme,-2.05,5.9,0.07,0.00732,granny
+97,cerise,11.85,2.1,0.003,0.00502,amarelles
+98,pomme,0.49,7.1,0.157,0.00622,golden
+99,cerise,8.12,3.3,0.012,0.00632,amarelles
