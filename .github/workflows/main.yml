@@ -1,10 +1,6 @@
 name: Build & Test & Publish
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -39,12 +35,15 @@ jobs:
       run: |
         pytest
 
-    - name: Build and Upload to TestPyPI
+    - name: Build python package
       run: |
         python setup.py sdist bdist_wheel
-        python -m twine upload -r testpypi dist/*
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.TWINE_TEST_TOKEN }}
-        TWINE_REPOSITORY: testpypi
+
+    - name: Upload package to TestPyPI
+      if: success() && github.ref == 'refs/heads/master'
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.TWINE_TEST_TOKEN }}
+        repository_url: https://test.pypi.org/legacy/
       

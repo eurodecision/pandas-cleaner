@@ -1,6 +1,6 @@
-## Version 0.1
+## Version 0.0.1
 
-### What's new in 0.1.2 (February 25, 2022)
+### What's new in 0.0.1 (February 25, 2022)
 
 + **New detection methods**
     + `'length'` to detect string or number cells that do not match a desired number of characters
