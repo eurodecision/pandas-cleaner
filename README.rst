@@ -25,19 +25,6 @@ Pandas-cleaner offers functionnalities to automatically :
 
 + **reapply** the same rules to any other incoming fresh data.
 
-Installation
-------------
-
-Pandas-cleaner is at present time an internal EURODECISION python package. To download and install it:
-
-* Go to https://edgitlab.eurodecision.com/eurodecision/releases/-/packages
-* Select the most recent version (or any older according to your needs)
-* Download `pdcleaner-<version-number>-py3-none-any.whl`
-* Install using pip
-
-.. code-block:: shell
-
-  pip install pdcleaner-<version-number>-py3-none-any.whl
 
 Usage
 -----
