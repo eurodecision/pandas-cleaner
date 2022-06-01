@@ -23,3 +23,7 @@ bandit
 # tests
 pytest
 pytest-cov
+
+#packages
+twine
+wheel
