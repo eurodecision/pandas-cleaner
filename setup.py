@@ -16,7 +16,7 @@ else:
     raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
 setuptools.setup(
-    name="pdcleaner",
+    name="pandas-cleaner",
     version=version_str,
     author="Renan Hilbert",
     author_email="renan.hilbert@eurodecision.com",
