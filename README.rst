@@ -6,6 +6,8 @@
 pandas-cleaner
 ==============
 
+.. image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ed-ialifinaritra/74e11571ef9b1a732e44fe9fbbdc7f0b/raw/pdcleaner_coverage.json
+
 
 What is it ?
 ------------
