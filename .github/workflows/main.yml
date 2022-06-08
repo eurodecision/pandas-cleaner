@@ -37,8 +37,9 @@ jobs:
 
     - name: Get Coverage for badge
       run: |
-        SUMMARY="$(pytest --cov --cov-report term-missing | tail -3)"
-        echo "summary = $SUMMARY"
+        SUMMARY="$(pytest --cov --cov-report term-missing | tail -3 | head -1)"
+        TOKENS=($SUMMARY)
+        echo ${TOKENS[-1]}
 
     - name: Build python package
       run: |
