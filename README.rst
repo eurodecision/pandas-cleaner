@@ -6,6 +6,8 @@
 pandas-cleaner
 ==============
 
+.. image:: https://img.shields.io/pypi/v/pandas-cleaner   :alt: PyPI
+.. image:: https://img.shields.io/pypi/l/pandas-cleaner   :alt: PyPI - License
 .. image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ed-ialifinaritra/74e11571ef9b1a732e44fe9fbbdc7f0b/raw/pdcleaner_coverage.json
 
 
