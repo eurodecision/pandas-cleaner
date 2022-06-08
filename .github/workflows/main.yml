@@ -35,6 +35,12 @@ jobs:
       run: |
         pytest
 
+    - name: Get Coverage for badge
+      run: |
+        SUMMARY="$(pytest --cov --cov-report term-missing | tail -2 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKEN})"
+
     - name: Build python package
       run: |
         python setup.py sdist bdist_wheel
