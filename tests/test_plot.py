@@ -13,8 +13,8 @@ from pandas.testing import assert_series_equal
 from matplotlib import colors
 import matplotlib.pyplot as plt
 
-from pdcleaner.tests.utils.utils import plt_collection_to_series
-from pdcleaner.tests.utils.utils import assert_listoflist_near
+from tests.utils.utils import plt_collection_to_series
+from tests.utils.utils import assert_listoflist_near
 
 # Test numeric plots
 
