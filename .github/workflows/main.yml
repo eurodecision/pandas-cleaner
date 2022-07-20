@@ -31,6 +31,10 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+    - name: Build python package
+      run: |
+        python setup.py sdist bdist_wheel
+
     - name: Test with pytest
       run: |
         pytest
@@ -50,10 +54,6 @@ jobs:
         label: Test Coverage
         message: ${{ env.COVERAGE }}
         color: green
-
-    - name: Build python package
-      run: |
-        python setup.py sdist bdist_wheel
 
     - name: Upload package to TestPyPI
       if: success() && github.ref == 'refs/heads/master'
