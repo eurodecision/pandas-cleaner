@@ -61,7 +61,7 @@ Install dependencies
 ~~~~~~~~~~~~~~~~~~~~
 
 Pandas-cleaner depends on a few python packages, mainly pandas.
-The list of the dependencies needed for devlopment is provided in the requirements.txt file.
+The list of the dependencies needed for development is provided in the requirements.txt file.
 These dependencies can be easily installed using pip :
 
 .. code-block:: bash
@@ -158,5 +158,5 @@ GitHub will bring you to a page where you can enter a title and a description of
 3. Finally, click ``Create pull request``.
 
 The pandas-cleaner team will review your contribution and provide a feedback.
-If every requirement is valid, your changes will be merged in the devlopment branch and released
+If every requirement is valid, your changes will be merged in the development branch and released
 in the next release version.

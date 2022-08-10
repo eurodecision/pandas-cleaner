@@ -83,6 +83,11 @@ html_theme_options = {
                 "icon": "fab fa-github",
             },
             {
+                "name": "pypi",
+                "url": "https://pypi.org/project/pandas-cleaner/",
+                "icon": "fas fa-box",
+            },
+            {
                 "name": "EURODECISION",
                 "url": "https://eurodecision.com",
                 "icon": "_static/logo_ed_star.png",
