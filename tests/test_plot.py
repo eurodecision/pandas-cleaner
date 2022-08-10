@@ -17,7 +17,7 @@ from tests.utils.utils import plt_collection_to_series
 from tests.utils.utils import assert_listoflist_near
 
 # Test numeric plots
-
+import matplotlib; matplotlib.use('agg')
 
 def test_with_bounded(series_test_set):
     axs = series_test_set.cleaner.detect.bounded(lower=0, upper=10).plot()

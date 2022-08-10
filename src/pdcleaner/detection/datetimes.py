@@ -14,8 +14,8 @@ class DateRangeDetector(_DateTypeSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'date_range'
 
-    >>> series.detect.date_range(...)
-    >>> series.detect('date_range',...)
+    >>> series.cleaner.detect.date_range(...)
+    >>> series.cleaner.detect('date_range',...)
 
     This detection method flags values as potential errors wherever the corresponding Series
     element is outside the date range.

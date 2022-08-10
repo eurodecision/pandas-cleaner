@@ -18,8 +18,8 @@ class EmailSeriesDetector(PatternSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'email'
 
-    >>> series.detect.email(...)
-    >>> series.detect('email',...)
+    >>> series.cleaner.detect.email(...)
+    >>> series.cleaner.detect('email',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element does not match an email.
@@ -57,8 +57,8 @@ class UrlSeriesDetector(PatternSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'url'
 
-    >>> series.detect.url(...)
-    >>> series.detect('url',...)
+    >>> series.cleaner.detect.url(...)
+    >>> series.cleaner.detect('url',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element does not match a url.
@@ -133,8 +133,8 @@ class PingSeriesDetector(_ObjectTypeSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'ping'
 
-    >>> series.detect.ping(...)
-    >>> series.detect('ping',...)
+    >>> series.cleaner.detect.ping(...)
+    >>> series.cleaner.detect('ping',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element does not match a reachable url.
