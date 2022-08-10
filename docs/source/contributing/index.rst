@@ -4,7 +4,7 @@ Contributing
 .. toctree::
     :maxdepth: 2
 
-    bugs
-    documentation
-    enhancements
+    issues
     development
+    code_of_conduct
+

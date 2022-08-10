@@ -101,21 +101,6 @@ Clean the detected errors from the series using the chosen method among `drop`, 
     4     10
     dtype: int64
 
-Documentation
--------------
-
-The documentation is still a **work in progress**. 
-
-* Clone the project
-
-* Build the documentation using :
-
-.. code-block:: bash
-
-    cd docs
-    make html
-
-* Open `docs/build/html/index.html` in your browser
 
 Contributing to pandas-cleaner
 ------------------------------

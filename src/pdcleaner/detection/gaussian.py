@@ -186,8 +186,8 @@ class IqrSeriesDetector(_GaussianSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'iqr'
 
-    >>> series.detect.iqr(...)
-    >>> series.detect('iqr',...)
+    >>> series.cleaner.detect.iqr(...)
+    >>> series.cleaner.detect('iqr',...)
 
     This detection method flag values as errors wherever the corresponding Series element
     is outside the range defined by:
@@ -408,8 +408,8 @@ class ZScoreSeriesDetector(_GaussianSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'zscore'
 
-    >>> series.detect.zscore(...)
-    >>> series.detect('zscore',...)
+    >>> series.cleaner.detect.zscore(...)
+    >>> series.cleaner.detect('zscore',...)
 
     This detection method flag values as errors wherever the corresponding
     Series element has a Z-score above a given threshold.
@@ -629,8 +629,8 @@ class ModZScoreSeriesDetector(_GaussianSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'modzscore'
 
-    >>> series.detect.modzscore(...)
-    >>> series.detect('modzscore',...)
+    >>> series.cleaner.detect.modzscore(...)
+    >>> series.cleaner.detect('modzscore',...)
 
     This detection method flag values as errors wherever the corresponding
     Series element has a modified Z-score above a given threshold.

@@ -29,8 +29,8 @@ class BoundedSeriesDetector(_NumericalSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'bounded'
 
-    >>> series.detect.bounded(...)
-    >>> series.detect('bounded',...)
+    >>> series.cleaner.detect.bounded(...)
+    >>> series.cleaner.detect('bounded',...)
 
 
     This detection method flags values as potential errors wherever the
@@ -184,8 +184,8 @@ class CheckLenSeriesDetector(_SeriesDetector):
 
     Intended to be used by the detect method with the keyword 'length'
 
-    >>> series.detect.length(...)
-    >>> series.detect('length',...)
+    >>> series.cleaner.detect.length(...)
+    >>> series.cleaner.detect('length',...)
 
     This detection method flags elements as potential errors wherever the corresponding length of
     Series element is outside the range between lower and upper or fixed value.
@@ -388,8 +388,8 @@ class MissingValuesDetector(_Detector):
 
     Intended to be used by the detect method with the keyword 'missing'
 
-    >>> df.detect.missing(...)
-    >>> df.detect('missing',...)
+    >>> df.cleaner.detect.missing(...)
+    >>> df.cleaner.detect('missing',...)
 
     Parameters
     ----------
@@ -494,8 +494,8 @@ class DuplicatedDetector(_Detector):
     Intended to be used by the detect method with the keyword 'duplicated'. Can be used with
     series or dataframe
 
-    >>> df.detect.duplicated(...)
-    >>> df.detect('duplicated',...)
+    >>> df.cleaner.detect.duplicated(...)
+    >>> df.cleaner.detect('duplicated',...)
 
     Parameters
     ----------
@@ -588,8 +588,8 @@ class CustomDetector(_Detector):
 
     Intended to be used by the detect method with the keyword 'custom'
 
-    >>> df.detect.custom(...)
-    >>> df.detect('custom',...)
+    >>> df.cleaner.detect.custom(...)
+    >>> df.cleaner.detect('custom',...)
 
     Parameters
     ----------
@@ -704,8 +704,8 @@ class QuantilesSeriesDetector(BoundedSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'quantiles'
 
-    >>> series.detect.quantiles(...)
-    >>> series.detect('quantiles',...)
+    >>> series.cleaner.detect.quantiles(...)
+    >>> series.cleaner.detect('quantiles',...)
 
     This detection method flags values as errors wherever the corresponding
     Series element is outside the range between the values at given quantiles

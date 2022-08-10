@@ -331,8 +331,8 @@ class ExtraSpacesDetector(_ObjectTypeSeriesDetector):
 
     Intended to be used by the detect method with the keyword 'spaces'
 
-    >>> series.detect.spaces(...)
-    >>> series.detect('spaces',...)
+    >>> series.cleaner.detect.spaces(...)
+    >>> series.cleaner.detect('spaces',...)
 
     This detection method flags elements as potential errors wherever they
     contain an extra space at begininng or at the end.

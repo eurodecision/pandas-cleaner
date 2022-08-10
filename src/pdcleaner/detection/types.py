@@ -14,8 +14,8 @@ class TypeErrorsSeriesDetector(_SeriesDetector):
 
     Intended to be used by the detect method with the keyword 'types'
 
-    >>> series.detect.types(...)
-    >>> series.detect('types',...)
+    >>> series.cleaner.detect.types(...)
+    >>> series.cleaner.detect('types',...)
 
     This detection method flags elements as potential errors wherever the
     corresponding python type is different than the one specified.
@@ -136,8 +136,8 @@ class CastableSeriesDetector(_SeriesDetector):
 
     Intended to be used by the detect method with the keyword 'castable'
 
-    >>> series.detect.castable(...)
-    >>> series.detect('castable',...)
+    >>> series.cleaner.detect.castable(...)
+    >>> series.cleaner.detect('castable',...)
 
     This detection method flags elements in an object Series as errors
     when they can not be converted (casted) into a given type.
