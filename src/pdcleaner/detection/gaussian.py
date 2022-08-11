@@ -10,7 +10,7 @@ import pandas as pd
 
 from scipy import stats
 
-from pdcleaner.detection.basic import BoundedSeriesDetector
+from pdcleaner.detection.basic import bounded
 from pdcleaner.detection.basic import _raise_if_invalid_sided_or_inclusive_args
 from pdcleaner.utils.utils import raise_if_not_in
 
@@ -41,7 +41,7 @@ def _inverse_yeojohnson(xt: float, lambda_: float = 1) -> float:
     return X
 
 
-class _GaussianSeriesDetector(BoundedSeriesDetector):
+class _GaussianSeriesDetector(bounded):
     r"Base class for outliers detection based on a normal/gaussian distribution assumption."
 
     name = 'gaussian'
@@ -181,8 +181,8 @@ class _GaussianSeriesDetector(BoundedSeriesDetector):
         return self._msg
 
 
-class IqrSeriesDetector(_GaussianSeriesDetector):
-    r"""'iqr': Detect outliers as potential errors in a Series using the IQR method.
+class iqr(_GaussianSeriesDetector):
+    r"""Detect outliers as potential errors in a Series using the IQR method.
 
     Intended to be used by the detect method with the keyword 'iqr'
 
@@ -403,8 +403,8 @@ class IqrSeriesDetector(_GaussianSeriesDetector):
         return title, params
 
 
-class ZScoreSeriesDetector(_GaussianSeriesDetector):
-    r"""'zscore': Detect outliers as potential errors in a Series using the Z-score method.
+class zscore(_GaussianSeriesDetector):
+    r"""Detect outliers as potential errors in a Series using the Z-score method.
 
     Intended to be used by the detect method with the keyword 'zscore'
 
@@ -624,8 +624,8 @@ class ZScoreSeriesDetector(_GaussianSeriesDetector):
         return title, params
 
 
-class ModZScoreSeriesDetector(_GaussianSeriesDetector):
-    r"""'modzscore': Detect outliers as potential errors in a Series using the modified Z-score.
+class modzscore(_GaussianSeriesDetector):
+    r"""Detect outliers as potential errors in a Series using the modified Z-score.
 
     Intended to be used by the detect method with the keyword 'modzscore'
 

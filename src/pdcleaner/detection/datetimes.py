@@ -9,8 +9,8 @@ from pdcleaner.detection._base import _DateTypeSeriesDetector
 from pdcleaner.utils.utils import raise_if_not_in
 
 
-class DateRangeDetector(_DateTypeSeriesDetector):
-    r""" 'date_range': Detect if date value is between a given range.
+class date_range(_DateTypeSeriesDetector):
+    r"""Detect if date value is between a given range.
 
     Intended to be used by the detect method with the keyword 'date_range'
 

@@ -24,8 +24,8 @@ def _raise_if_invalid_sided_or_inclusive_args(inclusive="both", sided="both"):
                     f"sided must be in {legal_values}")
 
 
-class BoundedSeriesDetector(_NumericalSeriesDetector):
-    r"""'bounded' : Detect values outside of given bounds.
+class bounded(_NumericalSeriesDetector):
+    r"""Detect values outside of given bounds.
 
     Intended to be used by the detect method with the keyword 'bounded'
 
@@ -179,8 +179,8 @@ class BoundedSeriesDetector(_NumericalSeriesDetector):
         return ['lower', 'upper', 'inclusive', 'sided']
 
 
-class CheckLenSeriesDetector(_SeriesDetector):
-    r"""'length' : Detect elements with length outside of given bounds.
+class length(_SeriesDetector):
+    r"""Detect elements with length outside of given bounds.
 
     Intended to be used by the detect method with the keyword 'length'
 
@@ -383,8 +383,8 @@ class CheckLenSeriesDetector(_SeriesDetector):
         return ['mode', 'lower', 'upper', 'fix_value', 'inclusive']
 
 
-class MissingValuesDetector(_Detector):
-    r"""'missing' : Detect elements containing missing values
+class missing(_Detector):
+    r"""Detect elements containing missing values
 
     Intended to be used by the detect method with the keyword 'missing'
 
@@ -488,8 +488,8 @@ class MissingValuesDetector(_Detector):
         return ['how']
 
 
-class DuplicatedDetector(_Detector):
-    r""" 'duplicated': Detect duplicated elements
+class duplicated(_Detector):
+    r"""Detect duplicated elements
 
     Intended to be used by the detect method with the keyword 'duplicated'. Can be used with
     series or dataframe
@@ -583,8 +583,8 @@ class DuplicatedDetector(_Detector):
         return ['subset', 'keep']
 
 
-class CustomDetector(_Detector):
-    r"""'custom' : Detect errors using an user-defined callable
+class custom(_Detector):
+    r"""Detect errors using an user-defined callable
 
     Intended to be used by the detect method with the keyword 'custom'
 
@@ -699,8 +699,8 @@ class CustomDetector(_Detector):
         return []
 
 
-class QuantilesSeriesDetector(BoundedSeriesDetector):
-    r"""'quantiles': Detect errors values in a Series using quantiles.
+class quantiles(bounded):
+    r"""Detect errors values in a Series using quantiles.
 
     Intended to be used by the detect method with the keyword 'quantiles'
 

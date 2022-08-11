@@ -36,7 +36,7 @@ def test_with_iqr(series_test_set):
 
 
 def test_with_values(cat_series):
-    match = "'EnumSeriesDetector' object has no attribute 'plot'"
+    match = "'enum' object has no attribute 'plot'"
     vals = ["cat", "dog"]
     with pytest.raises(AttributeError, match=match):
         cat_series.cleaner.detect.enum(values=vals).plot()
