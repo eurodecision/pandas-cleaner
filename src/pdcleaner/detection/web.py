@@ -9,11 +9,11 @@ import requests
 
 import pandas as pd
 
-from pdcleaner.detection.strings import PatternSeriesDetector
+from pdcleaner.detection.strings import pattern
 from pdcleaner.detection._base import _ObjectTypeSeriesDetector
 
 
-class EmailSeriesDetector(PatternSeriesDetector):
+class email(pattern):
     r"""'email': Detect strings that do not match an email.
 
     Intended to be used by the detect method with the keyword 'email'
@@ -52,8 +52,8 @@ class EmailSeriesDetector(PatternSeriesDetector):
         return []
 
 
-class UrlSeriesDetector(PatternSeriesDetector):
-    r"""'url': Detect strings that do not match a url.
+class url(pattern):
+    r"""Detect strings that do not match a url.
 
     Intended to be used by the detect method with the keyword 'url'
 
@@ -128,8 +128,8 @@ class UrlSeriesDetector(PatternSeriesDetector):
         return ['check_protocol']
 
 
-class PingSeriesDetector(_ObjectTypeSeriesDetector):
-    r"""'ping': Detect strings that do not match a reachable url.
+class ping(_ObjectTypeSeriesDetector):
+    r"""Detect strings that do not match a reachable url.
 
     Intended to be used by the detect method with the keyword 'ping'
 

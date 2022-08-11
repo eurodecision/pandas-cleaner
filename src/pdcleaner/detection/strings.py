@@ -10,8 +10,8 @@ from pdcleaner.detection._base import _ObjectTypeSeriesDetector
 from pdcleaner.utils.utils import raise_if_not_in
 
 
-class PatternSeriesDetector(_ObjectTypeSeriesDetector):
-    r"""'pattern': Detect strings that do not match a given pattern.
+class pattern(_ObjectTypeSeriesDetector):
+    r"""Detect strings that do not match a given pattern.
 
     This detection method flags values as potential errors wherever the
     corresponding Series element does not match a given character sequence
@@ -183,8 +183,8 @@ class PatternSeriesDetector(_ObjectTypeSeriesDetector):
         return ['pattern', 'mode', 'case', 'flags']
 
 
-class KeyCollisionSeriesDetector(_ObjectTypeSeriesDetector):
-    r"""'keycollision': Detect strings that might be alternative representations of the same thing.
+class keycollision(_ObjectTypeSeriesDetector):
+    r"""Detect strings that might be alternative representations of the same thing.
 
     This detection method is typically useful for people names or for brands.
     It works on a clustering approach by grouping strings that might be alternative
@@ -326,8 +326,8 @@ class KeyCollisionSeriesDetector(_ObjectTypeSeriesDetector):
         return ['keys']
 
 
-class ExtraSpacesDetector(_ObjectTypeSeriesDetector):
-    r"""'spaces' : Detect elements whith extra spaces before and/or after the value.
+class spaces(_ObjectTypeSeriesDetector):
+    r"""Detect elements whith extra spaces before and/or after the value.
 
     Intended to be used by the detect method with the keyword 'spaces'
 

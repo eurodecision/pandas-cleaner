@@ -202,11 +202,11 @@ def test_report_fingerprint(capsys, cat_series):
     assert 'keys                     fingerprint' in captured.out
 
 
-def test_report_ndoutliers(capsys, anscombe):
+def test_report_outliers(capsys, anscombe):
     """multivariate outliers"""
     df = anscombe
     df = df[df.dataset == 'I'].reset_index()[['x', 'y']]
-    detector = df.cleaner.detect("ndoutliers")
+    detector = df.cleaner.detect("outliers")
     detector.report()
     captured = capsys.readouterr()
     assert 'min_samples                        2' in captured.out

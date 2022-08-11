@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 from pdcleaner.utils.utils import add_method
-from pdcleaner.detection.values import ValueCountsSeriesDetector, ValuesFreqSeriesDetector
+from pdcleaner.detection.values import counts, freq
 
 
-@add_method(ValueCountsSeriesDetector, 'plot')
-@add_method(ValuesFreqSeriesDetector, 'plot')
+@add_method(counts, 'plot')
+@add_method(freq, 'plot')
 def plot(self,
          nfirst=0,
          nlast=0,

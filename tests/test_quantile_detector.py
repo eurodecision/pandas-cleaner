@@ -1,4 +1,4 @@
-"""UnitTests for :py:class:pdcleaner.detection.gaussian.QuantilesSeriesDetector"""
+"""UnitTests for :py:class:pdcleaner.detection.gaussian.quantiles"""
 
 import pandas as pd
 import pytest

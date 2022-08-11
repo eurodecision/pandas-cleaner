@@ -12,7 +12,7 @@ from sklearn.cluster import DBSCAN
 from pdcleaner.detection._base import _QuantiDataFramesDetector
 
 
-class NDOutliersDataFramesDetector(_QuantiDataFramesDetector):
+class outliers(_QuantiDataFramesDetector):
     r"""Detects outliers in a  numeric DataFrame using a clustering DBScan algorithm
 
     This detection methods flags outliers in N-dimensional numerical datasets.
@@ -59,7 +59,7 @@ class NDOutliersDataFramesDetector(_QuantiDataFramesDetector):
     >>> df = pd.DataFrame({'x': [1, 1.1, 4],
                            'y': [1.1, 1, 4],
                            'z': [1, 1.1, 4]})
-    >>> detector = df.cleaner.detect.ndoutliers()
+    >>> detector = df.cleaner.detect.outliers()
     >>> print(my_detector.is_error())
         0    False
         1    False
@@ -72,7 +72,7 @@ class NDOutliersDataFramesDetector(_QuantiDataFramesDetector):
     >>> df = pd.DataFrame({'x': [1, 1.1, 4, np.nan],
                            'y': [1.1, 1, 4, 5],
                            'z': [1, 1.1, 4, 5]})
-    >>> detector = df.cleaner.detect.ndoutliers()
+    >>> detector = df.cleaner.detect.outliers()
     >>> print(my_detector.is_error())
         0    False
         1    False
@@ -80,7 +80,7 @@ class NDOutliersDataFramesDetector(_QuantiDataFramesDetector):
         3    False
         dtype: bool
     """
-    name = 'ndoutliers'
+    name = 'outliers'
 
     def __init__(self, obj, detector_obj=None, eps=None, min_samples=2):
         super().__init__(obj)

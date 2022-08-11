@@ -9,8 +9,8 @@ from pdcleaner.detection._base import _SeriesDetector
 from pdcleaner.utils.utils import raise_if_not_in
 
 
-class TypeErrorsSeriesDetector(_SeriesDetector):
-    r"""'types' : Detect elements with type errors.
+class types(_SeriesDetector):
+    r"""Detect elements with type errors.
 
     Intended to be used by the detect method with the keyword 'types'
 
@@ -131,8 +131,8 @@ class TypeErrorsSeriesDetector(_SeriesDetector):
         return ['ptype']
 
 
-class CastableSeriesDetector(_SeriesDetector):
-    r"""'castable' : Detect elements that cannot be casted into target type.
+class castable(_SeriesDetector):
+    r"""Detect elements that cannot be casted into target type.
 
     Intended to be used by the detect method with the keyword 'castable'
 

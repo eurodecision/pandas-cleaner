@@ -4,10 +4,10 @@ import seaborn as sns
 
 from pdcleaner.utils.utils import add_method
 from pdcleaner.detection.values \
-    import CategoriesAssociationsDataFramesDetector
+    import associations
 
 
-@add_method(CategoriesAssociationsDataFramesDetector, 'plot')
+@add_method(associations, 'plot')
 def plot(self, color='green', errors_color='red', fmt=".0f"):
     """plot a colored matrix (heatmap) représentation of categories associations.
 

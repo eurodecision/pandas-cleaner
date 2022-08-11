@@ -1,10 +1,10 @@
 import pandas as pd
 
 from pdcleaner.utils.utils import add_method
-from pdcleaner.detection.strings import KeyCollisionSeriesDetector
+from pdcleaner.detection.strings import keycollision
 
 
-@add_method(KeyCollisionSeriesDetector, 'plot')
+@add_method(keycollision, 'plot')
 def plot(self, cmap=None, not_displayed_color='red', nfirst=0, nlast=0, figsize=None):
     """plot a countplot of values frequency grouped by keys, with options to compact the graph
 

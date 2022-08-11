@@ -7,8 +7,13 @@ import pandas as pd
 from pdcleaner.detection._base import _SeriesDetector, _TwoColsCategoricalDataFramesDetector
 
 
-class EnumSeriesDetector(_SeriesDetector):
-    r"""'enum': Detect class values not in a given list.
+class enum(_SeriesDetector):
+    r"""Detect class values not in a given list.
+
+    Intended to be used by the detect method with the keyword 'enum'.
+
+    >>> series.cleaner.detect.enum(...)
+    >>> series.cleaner.detect('enum',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element is not in the given values list.
@@ -123,12 +128,16 @@ class EnumSeriesDetector(_SeriesDetector):
         return self._obj[mask].index
 
 
-class ValueSeriesDetector(_SeriesDetector):
-    r"""'value': Detect class values different from a value.
+class value(_SeriesDetector):
+    r"""Detect class values different from a value.
+
+    Intended to be used by the detect method with the keyword 'value'.
+
+    >>> series.cleaner.detect.value(...)
+    >>> series.cleaner.detect('value',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element is different or not from a given value.
-
 
     Note
     ----
@@ -260,8 +269,13 @@ class ValueSeriesDetector(_SeriesDetector):
         return ['value', 'check_type', 'forbidden']
 
 
-class ValueCountsSeriesDetector(_SeriesDetector):
-    r"""'counts': Detect class values that appear at max n times.
+class counts(_SeriesDetector):
+    r"""Detect class values that appear at max n times.
+
+    Intended to be used by the detect method with the keyword 'counts'.
+
+    >>> series.cleaner.detect.counts(...)
+    >>> series.cleaner.detect('counts',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element appears less or = than n times in the Series.
@@ -379,8 +393,13 @@ class ValueCountsSeriesDetector(_SeriesDetector):
         return ['n']
 
 
-class ValuesFreqSeriesDetector(_SeriesDetector):
-    r"""'freq': Detect class values that appear less than a given freq.
+class freq(_SeriesDetector):
+    r"""Detect class values that appear less than a given freq.
+
+    Intended to be used by the detect method with the keyword 'freq'.
+
+    >>> series.cleaner.detect.freq(...)
+    >>> series.cleaner.detect('freq',...)
 
     This detection method flags values as potential errors wherever the
     corresponding Series element appears less than a given frequency (ratio
@@ -501,8 +520,13 @@ class ValuesFreqSeriesDetector(_SeriesDetector):
         return ['freq']
 
 
-class CategoriesAssociationsDataFramesDetector(_TwoColsCategoricalDataFramesDetector):
+class associations(_TwoColsCategoricalDataFramesDetector):
     r"""Detects least frequent associations between two category columns
+
+    Intended to be used by the detect method with the keyword 'associations'
+
+    >>> dataframe.cleaner.detect.associations(...)
+    >>> dataframe.cleaner.detect('associations',...)
 
     Parameters
     ----------
