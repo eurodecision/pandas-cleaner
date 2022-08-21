@@ -13,8 +13,8 @@ from pandas.testing import assert_series_equal
 from matplotlib import colors
 import matplotlib.pyplot as plt
 
-from tests.utils.utils import plt_collection_to_series
-from tests.utils.utils import assert_listoflist_near
+from tests.tests_utils.utils import plt_collection_to_series
+from tests.tests_utils.utils import assert_listoflist_near
 
 # Test numeric plots
 import matplotlib; matplotlib.use('agg')
