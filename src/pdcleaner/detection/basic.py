@@ -3,6 +3,7 @@ Basic detectors
 """
 #pylint: disable=too-many-arguments
 
+from cmath import isfinite
 import warnings
 import numbers
 
@@ -188,7 +189,8 @@ class length(_SeriesDetector):
     >>> series.cleaner.detect('length',...)
 
     This detection method flags elements as potential errors wherever the corresponding length of
-    Series element is outside the range between lower and upper or fixed value.
+    Series element is outside the range between lower and upper. Alternatively, can be used
+    with a fixed lenght value.
 
     Note
     ----
@@ -196,24 +198,24 @@ class length(_SeriesDetector):
 
     Parameters
     ----------
-    mode: string , Default = 'fixed_value'
-        - 'bound' : the length of the elements is bounded by a minimum and maximum value
-        - 'fixed_value' : the length of the elements is equal to a fixed value.
-
     lower : float or None (Default)
-        Lower bound in case of 'min' or 'bound' mode
+        Lower bound
 
     upper : float or None (Default)
-        Upper bound in case of 'max' or 'bound' mode
+        Upper bound
 
-    fix_value : float or None ( Default)
+    value : float or None ( Default)
         Specific length of the element
 
     Raises
     ------
+    TypeError
+        when at least one of lower, upper or value is not a number
     ValueError
-        when lower or upper is not specified in 'bound' mode and fix_value is not specified in
-        'fixed_value' mode
+        when lower or upper is specified at the same time as value or 
+        when none of the three is given
+    ValueError
+        when lower >= upper
 
 
     Examples
@@ -222,7 +224,7 @@ class length(_SeriesDetector):
     >>> import pdcleaner
 
     >>> my_series = pd.Series(['75013','78000' , '931204', '952684'], dtype='string')
-    >>> my_detector = my_series.cleaner.detect.length(mode='fixed_value', fix_value=5)
+    >>> my_detector = my_series.cleaner.detect.length(value=5)
     >>> print(my_detector.is_error())
     0    False
     1    False
@@ -233,7 +235,7 @@ class length(_SeriesDetector):
     with two bounds specified
 
     >>> my_series = pd.Series(['1','001' , '01460', '0011448'], dtype='string')
-    >>> my_detector = my_series.cleaner.detect.length(mode='bound', lower=2, upper=6)
+    >>> my_detector = my_series.cleaner.detect.length(lower=2, upper=6)
     >>> print(my_detector.is_error())
     0    True
     1    False
@@ -244,7 +246,7 @@ class length(_SeriesDetector):
     Can be used with integers
 
     >>> my_series = pd.Series([1, 1234567 , 1460, np.nan])
-    >>> my_detector = my_series.cleaner.detect.length(mode='bound', upper=6)
+    >>> my_detector = my_series.cleaner.detect.length(upper=6)
     >>> my_detector.is_error()
     0    False
     1     True
@@ -255,7 +257,7 @@ class length(_SeriesDetector):
     and with floats
 
     >>> my_series = pd.Series([1.007, 1.234567 , 1.460], dtype='float64')
-    >>> my_detector = my_series.cleaner.detect.length(mode='bound', upper=6)
+    >>> my_detector = my_series.cleaner.detect.length(upper=6)
     >>> my_detector.is_error()
     0    False
     1     True
@@ -265,7 +267,7 @@ class length(_SeriesDetector):
     Missing values are not treated as errors.
 
     >>> my_series = pd.Series(['1','001' , '01460', np.nan], dtype='string')
-    >>> my_detector = my_series.cleaner.detect.length(mode='bound', upper=6)
+    >>> my_detector = my_series.cleaner.detect.length(upper=6)
     >>> print(my_detector.is_error())
     0     False
     1     False
@@ -281,16 +283,15 @@ class length(_SeriesDetector):
             raise TypeError("Lower bound must be a number")
         if not isinstance(self.upper, numbers.Number):
             raise TypeError("Upper bound must be a number")
-        if not isinstance(self.fix_value, numbers.Number):
-            raise TypeError("Fix value must be a number")
+        if not isinstance(self.value, numbers.Number):
+            raise TypeError("Argument value must be a number")
 
     def __init__(self,
                  obj,
                  detector_obj=None,
-                 mode="fixed_value",
                  lower=np.NINF,
                  upper=np.inf,
-                 fix_value=np.inf,
+                 value=np.inf,
                  inclusive="both"
                  ):
         super().__init__(obj)
@@ -299,36 +300,32 @@ class length(_SeriesDetector):
         raise_if_not_in(inclusive, legal_values,
                         f"inclusive must be in {legal_values}")
 
-        legal_values = ["fixed_value", "bound"]
-        raise_if_not_in(mode, legal_values,
-                        f"mode must be in {legal_values}")
-
         if not detector_obj:
-            self._mode = mode
             self._lower = lower
             self._upper = upper
-            self._fix_value = fix_value
+            self._value = value
             self._inclusive = inclusive
         else:
-            self._mode = detector_obj.mode
             self._lower = detector_obj.lower
             self._upper = detector_obj.upper
-            self._fix_value = detector_obj.fix_value
+            self._value = detector_obj.value
             self._inclusive = detector_obj.inclusive
 
         self._raise_if_non_numeric_bounds()
 
-        if self._mode == 'fixed_value':
-            if np.isinf(self._fix_value):
-                raise ValueError("fix_value must be specified in fixed_value mode")
-            if np.isfinite(self._lower) or np.isfinite(self._upper):
-                warnings.warn("Upper or Lower bound is not necessary in fixed_value mode")
+        if(not np.isfinite(self._value)
+           and not np.isfinite(self._lower)
+           and not np.isfinite(self._upper)
+           ):
+            raise ValueError("At least one argument must be provided")
 
-        if self._mode == 'bound':
-            if np.isinf(self._lower) & np.isinf(self._upper):
-                raise ValueError("lower or upper must be specified in bound mode")
-            if np.isfinite(self._fix_value):
-                warnings.warn("Fix_value is not necessary in bound mode")
+        if np.isfinite(self._value) and (np.isfinite(self._upper) or np.isfinite(self._lower)):
+            raise ValueError("Incompatible arguments: value and upper or lower")
+
+        if np.isfinite(self._value):
+            self._mode = 'fixed_value'
+        else:
+            self._mode = 'bound'
 
         if self._lower >= self._upper:
             raise ValueError("Lower bound is >= upper bound")
@@ -349,9 +346,9 @@ class length(_SeriesDetector):
         return self._upper
 
     @property
-    def fix_value(self) -> float:
+    def value(self) -> float:
         """Fix length value"""
-        return self._fix_value
+        return self._value
 
     @property
     def inclusive(self) -> str:
@@ -362,7 +359,7 @@ class length(_SeriesDetector):
     def index(self) -> pd.Index:
         """Indices of the rows detected as errors"""
         if self.mode == "fixed_value":
-            mask = ~(self._obj.apply(lambda x: len(str(x)) == self.fix_value))
+            mask = ~(self._obj.apply(lambda x: len(str(x)) == self.value))
         elif self.mode == "bound":
             if self.inclusive == "both":
                 mask = ~(self._obj.apply(lambda x: self.lower <= len(str(x)) <= self.upper))
@@ -380,7 +377,7 @@ class length(_SeriesDetector):
     @property
     def _reported(self):
         """Properties displayed by the report() method"""
-        return ['mode', 'lower', 'upper', 'fix_value', 'inclusive']
+        return ['mode', 'lower', 'upper', 'value', 'inclusive']
 
 
 class missing(_Detector):

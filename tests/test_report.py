@@ -230,7 +230,7 @@ def test_report_missing(capsys, dataframe_with_nan):
 
 def test_report_length(capsys, series_with_different_length):
     """length"""
-    detector = series_with_different_length.cleaner.detect('length', mode='bound', lower=3)
+    detector = series_with_different_length.cleaner.detect('length', lower=3)
     detector.report()
     captured = capsys.readouterr()
     assert 'lower                              3' in captured.out
