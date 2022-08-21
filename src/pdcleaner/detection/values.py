@@ -647,13 +647,16 @@ class associations(_TwoColsCategoricalDataFramesDetector):
         gt_than_limit = (crosstab > limit).stack().reset_index()
         errors = df.merge(gt_than_limit, on=[col1, col2]).iloc[:, -1]
 
-        return (df[errors]
-                .drop_duplicates()
-                .reset_index()
-                .iloc[:, -2:]
-                .apply(tuple, axis=1)
-                .tolist()
-                )
+        assoc = (
+            df[errors]
+            .drop_duplicates()
+            .reset_index()
+            .iloc[:, -2:]
+        )
+
+        valid_associations = list(map(tuple, assoc.values))
+
+        return valid_associations
 
     @property
     def index(self) -> pd.Index:
