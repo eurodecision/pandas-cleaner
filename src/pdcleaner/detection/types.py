@@ -43,10 +43,10 @@ class types(_SeriesDetector):
     >>> import pandas as pd
     >>> import pdcleaner
 
-    >>> my_series = pd.Series([1, 2, 100, 3], dtype='float64')
-    >>> my_series[1] = 'One'
-    >>> my_detector = my_series.cleaner.detect.dtype(ptype=float)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([1, 2, 100, 3], dtype='float64')
+    >>> series[1] = 'One'
+    >>> detector = series.cleaner.detect.dtype(ptype=float)
+    >>> print(detector.is_error())
     0    False
     1     True
     2    False
@@ -55,11 +55,11 @@ class types(_SeriesDetector):
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series([1., 2., np.nan, 3.])
-    >>> my_series[1] = 'One'
-    >>> my_series[2] = np.nan
-    >>> my_detector = my_series.cleaner.detect.type(ptype=int)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([1., 2., np.nan, 3.])
+    >>> series[1] = 'One'
+    >>> series[2] = np.nan
+    >>> detector = series.cleaner.detect.type(ptype=int)
+    >>> print(detector.is_error())
     0    False
     1     True
     2    False
@@ -69,13 +69,13 @@ class types(_SeriesDetector):
     If no type is specified, find elements whose types differ
     from the first one
 
-    >>> my_series = pd.Series(['A', 2, np.nan, 'D'])
-    >>> my_detector = my_series.cleaner.detect('type')
-    >>> type(my_series[0])
+    >>> series = pd.Series(['A', 2, np.nan, 'D'])
+    >>> detector = series.cleaner.detect('type')
+    >>> type(series[0])
     str
-    >>>print(my_detector.ptype)
+    >>>print(detector.ptype)
     str
-    >>> print(my_detector.is_error())
+    >>> print(detector.is_error())
     0    False
     1     True
     2    False
@@ -84,24 +84,24 @@ class types(_SeriesDetector):
 
     The first detector detects the right type as str
 
-    >>> my_series = pd.Series(['A', 2, np.nan, 'D'])
-    >>> my_series_test = pd.Series([1, 'Two'])
-    >>> my_detector = my_series.cleaner.detect('type')
-    >>> my_second_detector = my_series_test.cleaner.detect(my_detector)
-    >>> print(my_second_detector.is_error())
+    >>> series = pd.Series(['A', 2, np.nan, 'D'])
+    >>> series_test = pd.Series([1, 'Two'])
+    >>> detector = series.cleaner.detect('type')
+    >>> second_detector = series_test.cleaner.detect(detector)
+    >>> print(second_detector.is_error())
     0     True
     1    False
     dtype: bool
     """
     name = 'types'
 
-    def __init__(self, obj, detector_obj=None, ptype=None):
+    def __init__(self, obj, detector=None, ptype=None):
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             self._ptype = ptype
         else:
-            self._ptype = detector_obj.ptype
+            self._ptype = detector.ptype
 
         if not isinstance(self.ptype, type):
             raise TypeError("ptype bound must be a python built-in type")
@@ -180,9 +180,9 @@ class castable(_SeriesDetector):
     >>> import pandas as pd
     >>> import pdcleaner
 
-    >>> my_series = pd.Series(['1','2.0','1.2','A','100', '22/05/1975'], dtype='object')
-    >>> my_detector = my_series.cleaner.detect('castable', target='int')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['1','2.0','1.2','A','100', '22/05/1975'], dtype='object')
+    >>> detector = series.cleaner.detect('castable', target='int')
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -191,8 +191,8 @@ class castable(_SeriesDetector):
     5     True
     dtype: bool
 
-    >>> my_detector = my_series.cleaner.detect('castable', target='date')
-    >>> print(my_detector.is_error())
+    >>> detector = series.cleaner.detect('castable', target='date')
+    >>> print(detector.is_error())
     0     True
     1     True
     2     True
@@ -201,8 +201,8 @@ class castable(_SeriesDetector):
     5    False
     dtype: bool
 
-    >>> my_detector = my_series.cleaner.detect('castable', target='number')
-    >>> my_detector.is_error()
+    >>> detector = series.cleaner.detect('castable', target='number')
+    >>> detector.is_error()
     0    False
     1    False
     2    False
@@ -211,10 +211,10 @@ class castable(_SeriesDetector):
     5     True
     dtype: bool
 
-    >>> my_series = pd.Series(['Yes','No','No','Yes','Ok', 'Nok'], dtype='object')
-    >>> my_detector = my_series.cleaner.detect('castable', target='boolean',
+    >>> series = pd.Series(['Yes','No','No','Yes','Ok', 'Nok'], dtype='object')
+    >>> detector = series.cleaner.detect('castable', target='boolean',
                                                 bool_values={"Yes":True, "No":False})
-    >>> my_detector.is_error()
+    >>> detector.is_error()
     0    False
     1    False
     2    False
@@ -225,9 +225,9 @@ class castable(_SeriesDetector):
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['1','2.0','1.2','A','100', np.nan], dtype='object')
-    >>> my_detector = my_series.cleaner.detect('castable', target='number')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['1','2.0','1.2','A','100', np.nan], dtype='object')
+    >>> detector = series.cleaner.detect('castable', target='number')
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -239,22 +239,22 @@ class castable(_SeriesDetector):
     """
     name = 'castable'
 
-    def __init__(self, obj, detector_obj=None, target=None, **kwargs):
+    def __init__(self, obj, detector=None, target=None, **kwargs):
         super().__init__(obj)
 
         if obj.dtype != 'object':
             raise TypeError("This detector is only for object series.")
 
-        if not detector_obj:
+        if not detector:
             self._target = target
             self._thousands = kwargs.get('thousands')
             self._decimal = kwargs.get('decimal')
             self._bool_values = kwargs.get('bool_values')
         else:
-            self._target = detector_obj.target
-            self._thousands = detector_obj.thousands
-            self._decimal = detector_obj.decimal
-            self._bool_values = detector_obj.bool_values
+            self._target = detector.target
+            self._thousands = detector.thousands
+            self._decimal = detector.decimal
+            self._bool_values = detector.bool_values
 
         if self._target is None:
             raise ValueError("Target parameter must be defined")

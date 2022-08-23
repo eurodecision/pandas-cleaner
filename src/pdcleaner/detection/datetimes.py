@@ -37,10 +37,10 @@ class date_range(_DateTypeSeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['2022-10-01', '2021-06-11', '2019-04-03',' 2020-09-25'])
-    >>> my_series= pd.to_datetime(my_series)
-    >>> my_detector = my_series.cleaner.detect.date_range(lower='2020-06-15', upper='2022-08-05')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['2022-10-01', '2021-06-11', '2019-04-03',' 2020-09-25'])
+    >>> series= pd.to_datetime(series)
+    >>> detector = series.cleaner.detect.date_range(lower='2020-06-15', upper='2022-08-05')
+    >>> print(detector.is_error())
     0     True
     1    False
     2     True
@@ -49,8 +49,8 @@ class date_range(_DateTypeSeriesDetector):
 
     With only one bound specified
 
-    >>> my_detector = my_series.cleaner.detect.date_range(upper='2022-08-05')
-    >>> print(my_detector.is_error())
+    >>> detector = series.cleaner.detect.date_range(upper='2022-08-05')
+    >>> print(detector.is_error())
     0     True
     1    False
     2    False
@@ -70,7 +70,7 @@ class date_range(_DateTypeSeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  lower=pd.Timestamp.min,
                  upper=pd.Timestamp.max,
                  inclusive="both"
@@ -82,14 +82,14 @@ class date_range(_DateTypeSeriesDetector):
         raise_if_not_in(inclusive, legal_values,
                         f"inclusive must be in {legal_values}")
 
-        if not detector_obj:
+        if not detector:
             self._lower = lower
             self._upper = upper
             self._inclusive = inclusive
         else:
-            self._lower = detector_obj.lower
-            self._upper = detector_obj.upper
-            self._inclusive = detector_obj.inclusive
+            self._lower = detector.lower
+            self._upper = detector.upper
+            self._inclusive = detector.inclusive
 
         if self._lower != pd.Timestamp.min:
             if not self.is_date(self._lower):

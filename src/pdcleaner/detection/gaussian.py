@@ -48,7 +48,7 @@ class _GaussianSeriesDetector(bounded):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  threshold=1.5,
                  inclusive="both",
                  sided="both",
@@ -79,7 +79,7 @@ class _GaussianSeriesDetector(bounded):
         if pvalue <= 0:
             raise ValueError('pvalue must be positive')
 
-        if not detector_obj:
+        if not detector:
             self._threshold = threshold
             self._inclusive = inclusive
             self._sided = sided
@@ -92,13 +92,13 @@ class _GaussianSeriesDetector(bounded):
             else:
                 self._isnormal = False
         else:
-            self._threshold = detector_obj.threshold
-            self._inclusive = detector_obj.inclusive
-            self._sided = detector_obj._sided
-            self._normaltest = detector_obj.normaltest
-            self._pvalue = detector_obj.pvalue
-            self._transform = detector_obj.transform
-            self._isnormal = detector_obj.isnormal
+            self._threshold = detector.threshold
+            self._inclusive = detector.inclusive
+            self._sided = detector._sided
+            self._normaltest = detector.normaltest
+            self._pvalue = detector.pvalue
+            self._transform = detector.transform
+            self._isnormal = detector.isnormal
 
         if not isinstance(self._threshold, numbers.Number):
             print(self._threshold)
@@ -276,9 +276,9 @@ class iqr(_GaussianSeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series([1,2,100,3])
-    >>> my_detector = my_series.cleaner.detect.iqr()
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([1,2,100,3])
+    >>> detector = series.cleaner.detect.iqr()
+    >>> print(detector.is_error())
         0    False
         1    False
         2     True
@@ -334,7 +334,7 @@ class iqr(_GaussianSeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  threshold=1.5,
                  inclusive="both",
                  sided="both",
@@ -344,7 +344,7 @@ class iqr(_GaussianSeriesDetector):
                  ):
 
         super().__init__(obj,
-                         detector_obj=detector_obj,
+                         detector=detector,
                          threshold=threshold,
                          inclusive=inclusive,
                          sided=sided,
@@ -353,7 +353,7 @@ class iqr(_GaussianSeriesDetector):
                          transform=transform,
                          )
 
-        if not detector_obj:
+        if not detector:
             if transform is None or self.isnormal:
                 self._q25 = self._obj.quantile(.25)
                 self._q75 = self._obj.quantile(.75)
@@ -361,8 +361,8 @@ class iqr(_GaussianSeriesDetector):
                 self._q25 = self._transformed.quantile(.25)
                 self._q75 = self._transformed.quantile(.75)
         else:
-            self._q25 = detector_obj.q25
-            self._q75 = detector_obj.q75
+            self._q25 = detector.q25
+            self._q75 = detector.q75
 
         self._iqr = self.q75 - self.q25
 
@@ -561,7 +561,7 @@ class zscore(_GaussianSeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  threshold=1.96,
                  inclusive="both",
                  sided="both",
@@ -571,7 +571,7 @@ class zscore(_GaussianSeriesDetector):
                  ):
 
         super().__init__(obj,
-                         detector_obj=detector_obj,
+                         detector=detector,
                          threshold=threshold,
                          inclusive=inclusive,
                          sided=sided,
@@ -580,7 +580,7 @@ class zscore(_GaussianSeriesDetector):
                          transform=transform,
                          )
 
-        if not detector_obj:
+        if not detector:
             if self.transform is None or self.isnormal:
                 self._mean = self._obj.mean()
                 self._std = self._obj.std()
@@ -588,8 +588,8 @@ class zscore(_GaussianSeriesDetector):
                 self._mean = self._transformed.mean()
                 self._std = self._transformed.std()
         else:
-            self._mean = detector_obj.mean
-            self._std = detector_obj.std
+            self._mean = detector.mean
+            self._std = detector.std
 
         self._lower = self.mean - self.threshold * self.std
         self._upper = self.mean + self.threshold * self.std
@@ -781,7 +781,7 @@ class modzscore(_GaussianSeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  threshold=3.5,
                  inclusive="both",
                  sided="both",
@@ -791,7 +791,7 @@ class modzscore(_GaussianSeriesDetector):
                  ):
 
         super().__init__(obj,
-                         detector_obj=detector_obj,
+                         detector=detector,
                          threshold=threshold,
                          inclusive=inclusive,
                          sided=sided,
@@ -800,7 +800,7 @@ class modzscore(_GaussianSeriesDetector):
                          transform=transform,
                          )
 
-        if not detector_obj:
+        if not detector:
             if self.transform is None or self.isnormal:
                 self._median = self._obj.median()
                 self._mad = ((self._obj - self._obj.median()).abs()).median()
@@ -808,8 +808,8 @@ class modzscore(_GaussianSeriesDetector):
                 self._median = self._transformed.median()
                 self._mad = ((self._transformed - self._transformed.median()).abs()).median()
         else:
-            self._median = detector_obj.median
-            self._mad = detector_obj.mad
+            self._median = detector.median
+            self._mad = detector.mad
 
         self._lower = self.median - self.threshold / 0.6475 * self.mad
         self._upper = self.median + self.threshold / .6475 * self.mad

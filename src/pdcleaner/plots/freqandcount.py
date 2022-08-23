@@ -50,8 +50,8 @@ def plot(self,
 
     Examples
     --------
-    >>> my_series = pd.Series(['cat','cat','dog', 'dog','dog','bird'])
-    >>> detector = my_series.cleaner.detect.freq(freq=.2)
+    >>> series = pd.Series(['cat','cat','dog', 'dog','dog','bird'])
+    >>> detector = series.cleaner.detect.freq(freq=.2)
     >>> detector.plot()
 
     .. image:: ../../_static/plot_freq.png

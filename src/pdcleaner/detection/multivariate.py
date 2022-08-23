@@ -60,7 +60,7 @@ class outliers(_QuantiDataFramesDetector):
                            'y': [1.1, 1, 4],
                            'z': [1, 1.1, 4]})
     >>> detector = df.cleaner.detect.outliers()
-    >>> print(my_detector.is_error())
+    >>> print(detector.is_error())
         0    False
         1    False
         2     True
@@ -73,7 +73,7 @@ class outliers(_QuantiDataFramesDetector):
                            'y': [1.1, 1, 4, 5],
                            'z': [1, 1.1, 4, 5]})
     >>> detector = df.cleaner.detect.outliers()
-    >>> print(my_detector.is_error())
+    >>> print(detector.is_error())
         0    False
         1    False
         2     True
@@ -82,10 +82,10 @@ class outliers(_QuantiDataFramesDetector):
     """
     name = 'outliers'
 
-    def __init__(self, obj, detector_obj=None, eps=None, min_samples=2):
+    def __init__(self, obj, detector=None, eps=None, min_samples=2):
         super().__init__(obj)
 
-        if detector_obj:
+        if detector:
             raise ValueError("This detection method can not be used "
                              "with an existing detector as an input.")
 
@@ -95,7 +95,7 @@ class outliers(_QuantiDataFramesDetector):
         if not isinstance(min_samples, int):
             raise TypeError("min_samples must be an integer")
 
-        if not detector_obj:
+        if not detector:
             if eps is None:
                 self._eps = ((self._obj - self._obj.mean())
                              / self._obj.std()).std().max()

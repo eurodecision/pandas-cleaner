@@ -56,18 +56,18 @@ class pattern(_ObjectTypeSeriesDetector):
 
     Strings are to be not lower cases letters only
 
-    >>> my_series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
-    >>> my_detector = my_series.cleaner.detect.pattern(pattern=r"[a-z]*", mode='fullmatch')
-    >>> print(my_detector.detected)
+    >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
+    >>> detector = series.cleaner.detect.pattern(pattern=r"[a-z]*", mode='fullmatch')
+    >>> print(detector.detected)
     0    Cat
     4     14
     dtype: object
 
     Strings must contain a "d"
 
-    >>> my_series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
-    >>> my_detector = my_series.cleaner.detect.values(pattern=r"d", mode='contains')
-    >>> print(my_detector.detected)
+    >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
+    >>> detector = series.cleaner.detect.values(pattern=r"d", mode='contains')
+    >>> print(detector.detected)
     0    Cat
     1    cat
     4     14
@@ -76,9 +76,9 @@ class pattern(_ObjectTypeSeriesDetector):
 
     Strings should be 'cat' or 'dog' whenever the case
 
-    >>> my_series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
-    >>> my_detector = my_series.cleaner.detect.values(pattern=r"cat|dog", mode='match', case=False)
-    >>> print(my_detector.detected)
+    >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
+    >>> detector = series.cleaner.detect.values(pattern=r"cat|dog", mode='match', case=False)
+    >>> print(detector.detected)
     3    bird
     4      14
     6
@@ -87,12 +87,12 @@ class pattern(_ObjectTypeSeriesDetector):
     One can also use a compiled regex. In this case, the arguments `case` and `flag`
     are ignored
 
-    >>> my_series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
+    >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
     >>> import re
     >>> regex = re.compile(r"[a-z]*")
-    >>> my_detector = my_series.cleaner.detect.pattern(pattern=regex, mode='fullmatch', case=True)
+    >>> detector = series.cleaner.detect.pattern(pattern=regex, mode='fullmatch', case=True)
     ... UserWarning: case and flag are ignored with a compiled regex
-    >>> print(my_detector.detected)
+    >>> print(detector.detected)
     0    Cat
     4     14
     dtype: object
@@ -101,7 +101,7 @@ class pattern(_ObjectTypeSeriesDetector):
     name = 'pattern'
 
     def __init__(self, obj,
-                 detector_obj=None,
+                 detector=None,
                  pattern="",
                  mode="match",
                  case=True,
@@ -109,16 +109,16 @@ class pattern(_ObjectTypeSeriesDetector):
                  ):
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             self._pattern = pattern
             self._mode = mode
             self._case = case
             self._flags = flags
         else:
-            self._pattern = detector_obj.pattern
-            self._mode = detector_obj.mode
-            self._case = detector_obj.case
-            self._flags = detector_obj.flags
+            self._pattern = detector.pattern
+            self._mode = detector.mode
+            self._case = detector.case
+            self._flags = detector.flags
 
         if self._pattern == "":
             raise ValueError("The pattern is empty")
@@ -225,24 +225,24 @@ class keycollision(_ObjectTypeSeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus',
+    >>> series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus',
                                'Linus Torvalds', 'Bill Gates', ])
-    >>> my_detector = my_series.cleaner.detect.keycollision()
-    >>> print(my_detector.is_error())
+    >>> detector = series.cleaner.detect.keycollision()
+    >>> print(detector.is_error())
     0    False
     1    True
     2    True
     3    False
     4    False
     dtype: bool
-    >>> print(my_detector.dict_keys)
+    >>> print(detector.dict_keys)
     {'linus torvalds': 'Linus Torvalds', 'bill gates': 'Bill Gates'}
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus', np.nan ])
-    >>> my_detector = my_series.cleaner.detect.keycollision()
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus', np.nan ])
+    >>> detector = series.cleaner.detect.keycollision()
+    >>> print(detector.is_error())
     0    False
     1    True
     2    False
@@ -251,7 +251,7 @@ class keycollision(_ObjectTypeSeriesDetector):
     """
     name = 'keycollision'
 
-    def __init__(self, obj, detector_obj=None, keys='fingerprint'):
+    def __init__(self, obj, detector=None, keys='fingerprint'):
         super().__init__(obj)
 
         if not isinstance(keys, str):
@@ -260,12 +260,12 @@ class keycollision(_ObjectTypeSeriesDetector):
         if keys not in ['fingerprint']:
             raise ValueError('Not a valid method. Only fingerprint method is implemented')
 
-        if not detector_obj:
+        if not detector:
             self._keys = keys
             self._dict_keys = self.dict_keys
         else:
-            self._keys = detector_obj.keys
-            self._dict_keys = detector_obj.dict_keys
+            self._keys = detector.keys
+            self._dict_keys = detector.dict_keys
 
     @property
     def keys(self):
@@ -353,9 +353,9 @@ class spaces(_ObjectTypeSeriesDetector):
 
     Examples
     --------
-    >>> my_series = pd.Series(['Paris','Paris ',' Lille', ' Lille ', 'Troyes'])
-    >>> my_detector = my_series.cleaner.detect.spaces(side='left')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['Paris','Paris ',' Lille', ' Lille ', 'Troyes'])
+    >>> detector = series.cleaner.detect.spaces(side='left')
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -363,8 +363,8 @@ class spaces(_ObjectTypeSeriesDetector):
     4    False
     dtype: bool
 
-    >>> my_detector = my_series.cleaner.detect.spaces(side='right')
-    >>> print(my_detector.is_error())
+    >>> detector = series.cleaner.detect.spaces(side='right')
+    >>> print(detector.is_error())
     0    False
     1     True
     2    False
@@ -372,8 +372,8 @@ class spaces(_ObjectTypeSeriesDetector):
     4    False
     dtype: bool
 
-    >>> my_detector = my_series.cleaner.detect.spaces(side='both')
-    >>> print(my_detector.is_error())
+    >>> detector = series.cleaner.detect.spaces(side='both')
+    >>> print(detector.is_error())
     0    False
     1     True
     2     True
@@ -385,7 +385,7 @@ class spaces(_ObjectTypeSeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  side='both'
                  ):
         super().__init__(obj)
@@ -393,10 +393,10 @@ class spaces(_ObjectTypeSeriesDetector):
         legal_values = ["left", "right", "both"]
         raise_if_not_in(side, legal_values, f"Parameter side must be {' or '.join(legal_values)}")
 
-        if not detector_obj:
+        if not detector:
             self._side = side
         else:
-            self._side = detector_obj.side
+            self._side = detector.side
 
     @property
     def side(self) -> str:

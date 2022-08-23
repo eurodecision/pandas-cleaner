@@ -9,13 +9,13 @@ import numpy as np
 import pandas as pd
 
 
-def clip(self, detector_obj, inplace=False):
+def clip(self, detector, inplace=False):
     """
     Clean numerical series by clipping between lower and upper values
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
         and provide upper and lower limits
 
@@ -33,15 +33,15 @@ def clip(self, detector_obj, inplace=False):
     Examples
     --------
 
-    >>> my_series = pd.Series([np.nan,
+    >>> series = pd.Series([np.nan,
                                0,
                                -5,
                                4,
                                6,
                                100,
                                ])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=0, upper=10)
-    >>> my_series.cleaner.clean.clip(my_detector)
+    >>> detector = series.cleaner.detect.bounded(lower=0, upper=10)
+    >>> series.cleaner.clean.clip(detector)
     0     NaN
     1     0.0
     2     0.0
@@ -52,8 +52,8 @@ def clip(self, detector_obj, inplace=False):
 
     Modify inplace
 
-    >>> my_series.cleaner.clean.clip(my_detector, inplace=True)
-    >>> my_series
+    >>> series.cleaner.clean.clip(detector, inplace=True)
+    >>> series
     0     NaN
     1     0.0
     2     0.0
@@ -62,15 +62,15 @@ def clip(self, detector_obj, inplace=False):
     5    10.0
     dtype: float64
     """
-    series = detector_obj.obj
+    series = detector.obj
 
-    if not hasattr(detector_obj, 'lower') or not hasattr(detector_obj, 'upper'):
+    if not hasattr(detector, 'lower') or not hasattr(detector, 'upper'):
         raise ValueError('The errors detection method does not have lower and upper bounds'
                          ' and can not be used with clip')
 
     # else
-    lower = detector_obj.lower
-    upper = detector_obj.upper
+    lower = detector.lower
+    upper = detector.upper
 
     if inplace:
         series.clip(upper=upper, lower=lower, inplace=True)
@@ -78,13 +78,13 @@ def clip(self, detector_obj, inplace=False):
     return series.clip(upper=upper, lower=lower)
 
 
-def drop(self, detector_obj, inplace=False):
+def drop(self, detector, inplace=False):
     """
     Clean by dropping errors
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
 
     inplace:  bool (Default: False)
@@ -106,15 +106,15 @@ def drop(self, detector_obj, inplace=False):
     Examples
     --------
 
-    >>> my_series = pd.Series([np.nan,
+    >>> series = pd.Series([np.nan,
                                0,
                                -5,
                                4,
                                6,
                                100,
                                ])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=0, upper=10)
-    >>> my_series.cleaner.clean.drop(my_detector)
+    >>> detector = series.cleaner.detect.bounded(lower=0, upper=10)
+    >>> series.cleaner.clean.drop(detector)
     0    NaN
     1    0.0
     3    4.0
@@ -123,8 +123,8 @@ def drop(self, detector_obj, inplace=False):
 
     Modify inplace
 
-    >>> my_series.cleaner.clean.drop(my_detector, inplace=True)
-    >>> my_series
+    >>> series.cleaner.clean.drop(detector, inplace=True)
+    >>> series
     0    NaN
     1    0.0
     3    4.0
@@ -135,36 +135,36 @@ def drop(self, detector_obj, inplace=False):
 
     >>> df = pd.DataFrame({"col1": [np.nan, 0, -5, 4, 6, 100],
     >>>                    "col2": ["a", "b", "c", "d", "e", "f"]})
-    >>> my_df_detector = df["col1"].cleaner.detect.bounded(lower=0, upper=10)
-    >>> df["col1"].cleaner.clean.drop(my_df_detector)
+    >>> df_detector = df["col1"].cleaner.detect.bounded(lower=0, upper=10)
+    >>> df["col1"].cleaner.clean.drop(df_detector)
 
     Cleaning a dataframe inplace with the drop method is not supported
     (issues a warning)
 
     >>> df = pd.DataFrame({"col1": [np.nan, 0, -5, 4, 6, 100],
     >>>                    "col2": ["a", "b", "c", "d", "e", "f"]})
-    >>> my_df_detector = df["col1"].cleaner.detect.bounded(lower=0, upper=10)
-    >>> df["col1"].cleaner.clean.drop(my_df_detector, inplace=True)
+    >>> df_detector = df["col1"].cleaner.detect.bounded(lower=0, upper=10)
+    >>> df["col1"].cleaner.clean.drop(df_detector, inplace=True)
     """
-    series = detector_obj.obj
+    series = detector.obj
 
     if inplace:
         if series._get_cacher() is not None:
             warnings.warn("Series is a column of a DataFrame. "
                           "Dropping inplace will not modify the DataFrame.")
 
-        self._obj.drop(detector_obj.index, inplace=True)
+        self._obj.drop(detector.index, inplace=True)
         return None
-    return self._obj.drop(detector_obj.index)
+    return self._obj.drop(detector.index)
 
 
-def to_na(self, detector_obj, inplace=False):
+def to_na(self, detector, inplace=False):
     """
     Clean by replacing errors by NaN
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
 
     inplace:  bool (Default: False)
@@ -178,15 +178,15 @@ def to_na(self, detector_obj, inplace=False):
     Examples
     --------
 
-    >>> my_series = pd.Series([np.nan,
+    >>> series = pd.Series([np.nan,
                                0,
                                -5,
                                4,
                                6,
                                100,
                                ])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=0, upper=10)
-    >>> my_series.cleaner.clean.to_na(my_detector)
+    >>> detector = series.cleaner.detect.bounded(lower=0, upper=10)
+    >>> series.cleaner.clean.to_na(detector)
     0    NaN
     1    0.0
     2    NaN
@@ -197,8 +197,8 @@ def to_na(self, detector_obj, inplace=False):
 
     Replace inplace
 
-    >>> my_series.cleaner.clean.to_na(my_detector, inplace=True)
-    >>> my_series
+    >>> series.cleaner.clean.to_na(detector, inplace=True)
+    >>> series
     0    NaN
     1    0.0
     2    NaN
@@ -207,21 +207,21 @@ def to_na(self, detector_obj, inplace=False):
     5    NaN
     dtype: float64
     """
-    series = detector_obj.obj
+    series = detector.obj
 
     if inplace:
-        series.where(detector_obj.not_error(), np.nan, inplace=True)
+        series.where(detector.not_error(), np.nan, inplace=True)
         return None
-    return series.where(detector_obj.not_error(), np.nan)
+    return series.where(detector.not_error(), np.nan)
 
 
-def replace(self, detector_obj, value=None, inplace=False):
+def replace(self, detector, value=None, inplace=False):
     """
     Clean by replacing errors by a value
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
     value: string, numeric, dict or callable
         The replacement strategy.
@@ -246,15 +246,15 @@ def replace(self, detector_obj, value=None, inplace=False):
     Examples
     --------
 
-    >>> my_series = pd.Series([np.nan,
+    >>> series = pd.Series([np.nan,
                                0,
                                -5,
                                4,
                                6,
                                100,
                                ])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=0, upper=10)
-    >>> my_series.cleaner.clean.replace(my_detector, value=5)
+    >>> detector = series.cleaner.detect.bounded(lower=0, upper=10)
+    >>> series.cleaner.clean.replace(detector, value=5)
     0    NaN
     1    0.0
     2    5.0
@@ -265,7 +265,7 @@ def replace(self, detector_obj, value=None, inplace=False):
 
     Replace using a dictionary
 
-    >>> my_series.cleaner.clean.replace(my_detector, value={100:10})
+    >>> series.cleaner.clean.replace(detector, value={100:10})
     0    NaN
     1    0.0
     2    NaN
@@ -276,7 +276,7 @@ def replace(self, detector_obj, value=None, inplace=False):
 
     Replace using a lambda (the lambda applies to the series of erroneous entries)
 
-    >>> my_series.cleaner.clean.replace(my_detector,
+    >>> series.cleaner.clean.replace(detector,
     >>>                                 value=lambda s: s.clip(lower=0) / 10 )
     0    NaN
     1    0.0
@@ -286,7 +286,7 @@ def replace(self, detector_obj, value=None, inplace=False):
     5   10.0
     dtype: float64
     """
-    series = detector_obj.obj
+    series = detector.obj
 
     if isinstance(value, dict):
         value_dict = value
@@ -295,10 +295,10 @@ def replace(self, detector_obj, value=None, inplace=False):
             return series_.map(value_dict)
         value = dict2func
 
-    return series.where(detector_obj.not_error(), value, inplace=inplace)
+    return series.where(detector.not_error(), value, inplace=inplace)
 
 
-def bykeys(self, detector_obj, inplace=False):
+def bykeys(self, detector, inplace=False):
     """
     Clean by merging values that have been identified as alternative representations
     of the same object by a key collision detector.
@@ -309,7 +309,7 @@ def bykeys(self, detector_obj, inplace=False):
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
     inplace:  bool (Default: False)
         Whether to perform the operation in place on the data.
@@ -345,24 +345,24 @@ def bykeys(self, detector_obj, inplace=False):
     dtype: object
     """
 
-    if not hasattr(detector_obj, 'dict_keys'):
+    if not hasattr(detector, 'dict_keys'):
         raise ValueError('The errors detection method does not have a keys dictionary')
 
     series = self._obj
 
-    keys = detector_obj.fingerprints(series)
+    keys = detector.fingerprints(series)
 
     if inplace:
-        dict_replace = pd.Series(keys.map(detector_obj.dict_keys).values,
+        dict_replace = pd.Series(keys.map(detector.dict_keys).values,
                                  index=series
                                  ).to_dict()
 
         series.replace(dict_replace, inplace=True)
         return None
-    return keys.map(detector_obj.dict_keys)
+    return keys.map(detector.dict_keys)
 
 
-def cast(self, detector_obj, **kwargs):
+def cast(self, detector, **kwargs):
     """
     Clean by casting value into the specific target type. When the value is not castable, it is
     transformed to NaN. This method works only with the castable detector.
@@ -372,7 +372,7 @@ def cast(self, detector_obj, **kwargs):
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
 
     Returns
@@ -382,9 +382,9 @@ def cast(self, detector_obj, **kwargs):
     Examples
     --------
 
-    >>> my_series = pd.Series(['100 000', '154,5', '9 000', '250,12'], dtype='object')
-    >>> my_detector = my_series.cleaner.detect.castable(target='float', thousands=' ', decimal=',')
-    >>> my_series.cleaner.clean('cast', my_detector)
+    >>> series = pd.Series(['100 000', '154,5', '9 000', '250,12'], dtype='object')
+    >>> detector = series.cleaner.detect.castable(target='float', thousands=' ', decimal=',')
+    >>> series.cleaner.clean('cast', detector)
     0    100000
     1    154.5
     2    9000
@@ -393,8 +393,8 @@ def cast(self, detector_obj, **kwargs):
 
     Casting into int
 
-    >>> my_detector = my_series.cleaner.detect.castable(target='int', thousands=' ', decimal=',')
-    >>> my_series.cleaner.clean('cast', my_detector)
+    >>> detector = series.cleaner.detect.castable(target='int', thousands=' ', decimal=',')
+    >>> series.cleaner.clean('cast', detector)
     0    100000
     1      <NA>
     2      9000
@@ -403,9 +403,9 @@ def cast(self, detector_obj, **kwargs):
 
     Casting into date
 
-    >>> my_series = pd.Series(['1.05', '154', '15/05/2022', 'Alice'], dtype='object')
-    >>> my_detector = my_series.cleaner.detect.castable(target='date')
-    >>> my_series.cleaner.clean('cast', my_detector, format="%d/%m/%Y")
+    >>> series = pd.Series(['1.05', '154', '15/05/2022', 'Alice'], dtype='object')
+    >>> detector = series.cleaner.detect.castable(target='date')
+    >>> series.cleaner.clean('cast', detector, format="%d/%m/%Y")
     0    NaT
     1    NaT
     2    2022-05-15
@@ -413,37 +413,37 @@ def cast(self, detector_obj, **kwargs):
     dtype: datetime64[ns]
     """
 
-    if detector_obj.name != 'castable':
+    if detector.name != 'castable':
         raise ValueError('This cleaning method works only with the castable detector')
 
-    series = detector_obj.obj
-    series = series.where(detector_obj.not_error(), np.nan)
+    series = detector.obj
+    series = series.where(detector.not_error(), np.nan)
 
-    if detector_obj.target == "int":
-        series = detector_obj.check_separators(series)
+    if detector.target == "int":
+        series = detector.check_separators(series)
         series = pd.to_numeric(series, errors="coerce").astype('Int32')
 
-    if detector_obj.target == "float":
-        series = detector_obj.check_separators(series)
+    if detector.target == "float":
+        series = detector.check_separators(series)
         series = pd.to_numeric(series, errors="coerce")
 
-    if detector_obj.target == "date":
+    if detector.target == "date":
         series = pd.to_datetime(series, errors="coerce", **kwargs)
 
-    if detector_obj.target == "boolean":
-        series = series.map(detector_obj.bool_values)
+    if detector.target == "boolean":
+        series = series.map(detector.bool_values)
 
     return series
 
 
-def strip(self, detector_obj):
+def strip(self, detector):
     """
     Clean by removing extraspaces detected by the 'spaces' detector. This method only works with
     this detector.
 
     Parameters
     ----------
-    detector_obj: a Detector object,
+    detector: a Detector object,
         The detector obj that will identify entries to clean
 
     Returns
@@ -452,9 +452,9 @@ def strip(self, detector_obj):
 
     Examples
     --------
-    >>> my_series = pd.Series(['Paris','Paris ',' Lille', ' Lille ', 'Troyes'])
-    >>> my_detector = my_series.cleaner.detect.spaces(side='right')
-    >>> my_series.cleaner.clean.strip(my_detector)
+    >>> series = pd.Series(['Paris','Paris ',' Lille', ' Lille ', 'Troyes'])
+    >>> detector = series.cleaner.detect.spaces(side='right')
+    >>> series.cleaner.clean.strip(detector)
     0    Paris
     1    Paris
     2     Lille
@@ -462,8 +462,8 @@ def strip(self, detector_obj):
     4    Troyes
     dtype: object
 
-    >>> my_detector = my_series.cleaner.detect.spaces(side='both')
-    >>> my_series.cleaner.clean.strip(my_detector)
+    >>> detector = series.cleaner.detect.spaces(side='both')
+    >>> series.cleaner.clean.strip(detector)
     0    Paris
     1    Paris
     2    Lille
@@ -472,16 +472,16 @@ def strip(self, detector_obj):
     dtype: object
     """
 
-    if detector_obj.name != 'spaces':
+    if detector.name != 'spaces':
         raise ValueError('This cleaning method works only with the spaces detector')
 
-    series = detector_obj.obj
+    series = detector.obj
 
-    if detector_obj.side == 'left':
+    if detector.side == 'left':
         series = series.str.lstrip()
-    elif detector_obj.side == 'right':
+    elif detector.side == 'right':
         series = series.str.rstrip()
-    elif detector_obj.side == 'both':
+    elif detector.side == 'both':
         series = series.str.strip()
 
     return series

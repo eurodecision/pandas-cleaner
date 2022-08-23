@@ -35,27 +35,27 @@ def plot(self, cmap=None, not_displayed_color='red', nfirst=0, nlast=0, figsize=
     Examples
     --------
 
-    >>> my_series = pd.Series(['Linus Torvalds',
+    >>> series = pd.Series(['Linus Torvalds',
                                'Torvalds, Linus',
                                'Linus Torvalds',
                                'Bill Gates',
                                'Bill Gates',
                                'Steve Jobs',
                                ])
-    >>> my_detector = my_series.cleaner.detect.keycollision()
-    >>> my_detector.plot()
+    >>> detector = series.cleaner.detect.keycollision()
+    >>> detector.plot()
 
     .. image:: ../../_static/plot_keycollision_1.png
 
     Display only the two most frequents
 
-    >>> my_detector.plot(nfirst=2)
+    >>> detector.plot(nfirst=2)
 
     .. image:: ../../_static/plot_keycollision_nfirst_2.png
 
     Display only the least frequent
 
-    >>> my_detector.plot(nlast=1)
+    >>> detector.plot(nlast=1)
 
     .. image:: ../../_static/plot_keycollision_nlast_1.png
     """

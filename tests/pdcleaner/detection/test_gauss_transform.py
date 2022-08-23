@@ -96,7 +96,7 @@ def test_modzscore_negative_pvalue(series_with_outlier):
 
 
 def test_iqr_transform_params_from_existing(series_with_outlier, series_test_set):
-    """params from detector_obj"""
+    """params from detector"""
     detector = series_with_outlier.cleaner.detect.iqr(transform='boxcox',
                                                       normaltest='warn',
                                                       pvalue=1e-2)
@@ -106,7 +106,7 @@ def test_iqr_transform_params_from_existing(series_with_outlier, series_test_set
 
 
 def test_zscore_transform_params_from_existing(series_with_outlier, series_test_set):
-    """params from detector_obj"""
+    """params from detector"""
     detector = series_with_outlier.cleaner.detect.zscore(transform='boxcox',
                                                          normaltest='warn',
                                                          pvalue=1e-2)
@@ -116,7 +116,7 @@ def test_zscore_transform_params_from_existing(series_with_outlier, series_test_
 
 
 def test_modzscore_transform_params_from_existing(series_with_outlier, series_test_set):
-    """params from detector_obj"""
+    """params from detector"""
     detector = series_with_outlier.cleaner.detect.modzscore(transform='boxcox',
                                                             normaltest='warn',
                                                             pvalue=1e-2)

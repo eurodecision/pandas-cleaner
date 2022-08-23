@@ -22,9 +22,9 @@ def test_get_method(df_num_cat):
 
 
 def test_get_kwargs(df_num_cat):
-    my_kwargs = {'threshold': 3}
-    detector = df_num_cat.cleaner.detect('iqr', **my_kwargs)
-    assert detector.method_kwargs == my_kwargs
+    kwargs = {'threshold': 3}
+    detector = df_num_cat.cleaner.detect('iqr', **kwargs)
+    assert detector.method_kwargs == kwargs
 
 
 def test_with_existing_detector(df_two_cat_cols):

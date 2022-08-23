@@ -41,9 +41,9 @@ class enum(_SeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['cat','cat','dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.enum(values=['cat','dog'])
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat','cat','dog','bird'])
+    >>> detector = series.cleaner.detect.enum(values=['cat','dog'])
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -52,17 +52,17 @@ class enum(_SeriesDetector):
 
     The detector can also be used with numerical values:
 
-    >>> my_series = pd.Series([5, 5.0, 10, 3])
-    >>> my_detector = my_series.cleaner.detect.enum(values=[5,3])
-    >>> print(my_detector.detected)
+    >>> series = pd.Series([5, 5.0, 10, 3])
+    >>> detector = series.cleaner.detect.enum(values=[5,3])
+    >>> print(detector.detected)
     2    10.0
     dtype: float64
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['cat',np.nan,'dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.enum(values=['cat','dog'])
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat',np.nan,'dog','bird'])
+    >>> detector = series.cleaner.detect.enum(values=['cat','dog'])
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -71,10 +71,10 @@ class enum(_SeriesDetector):
 
     Use `forbidden=True` to detect values in the list as errors
 
-    >>> my_series = pd.Series(['cat','cat','dog','bird'])
-    >>> my_detector = \
-        my_series.cleaner.detect.enum(values=['cat','dog'], forbidden=True)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat','cat','dog','bird'])
+    >>> detector = \
+        series.cleaner.detect.enum(values=['cat','dog'], forbidden=True)
+    >>> print(detector.is_error())
     0     True
     1     True
     2     True
@@ -85,7 +85,7 @@ class enum(_SeriesDetector):
     name = 'enum'
 
     def __init__(self, obj,
-                 detector_obj=None,
+                 detector=None,
                  values=None,
                  forbidden=False):
 
@@ -94,12 +94,12 @@ class enum(_SeriesDetector):
         if values is None:
             values = []
 
-        if not detector_obj:
+        if not detector:
             self._values = values
             self._forbidden = forbidden
         else:
-            self._values = detector_obj.values
-            self._forbidden = detector_obj.forbidden
+            self._values = detector.values
+            self._forbidden = detector.forbidden
 
         if len(self._values) == 0:
             raise ValueError("The list of authorized values is empty")
@@ -163,9 +163,9 @@ class value(_SeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['cat','cat','dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.value(value='cat')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat','cat','dog','bird'])
+    >>> detector = series.cleaner.detect.value(value='cat')
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -174,25 +174,25 @@ class value(_SeriesDetector):
 
     By default, the type of value and data is checked and must be identical
 
-    >>> my_series = pd.Series([5, 5.0])
-    >>> my_detector = my_series.cleaner.detect.value(value=5)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([5, 5.0])
+    >>> detector = series.cleaner.detect.value(value=5)
+    >>> print(detector.is_error())
     0    False
     1    True
     dtype: bool
 
-    >>> my_series = pd.Series([5, 5.0])
-    >>> my_detector = my_series.cleaner.detect.value(value=5, check_type=False)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([5, 5.0])
+    >>> detector = series.cleaner.detect.value(value=5, check_type=False)
+    >>> print(detector.is_error())
     0    False
     1    False
     dtype: bool
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['cat',np.nan,'dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.value(value='cat')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat',np.nan,'dog','bird'])
+    >>> detector = series.cleaner.detect.value(value='cat')
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -212,7 +212,7 @@ class value(_SeriesDetector):
     name = 'value'
 
     def __init__(self, obj,
-                 detector_obj=None,
+                 detector=None,
                  value=None,
                  check_type=True,
                  forbidden=False
@@ -220,14 +220,14 @@ class value(_SeriesDetector):
 
         super().__init__(obj)
 
-        if detector_obj is None:
+        if detector is None:
             self._value = value
             self._check_type = check_type
             self._forbidden = forbidden
         else:
-            self._value = detector_obj.value
-            self._check_type = detector_obj.check_type
-            self._forbidden = detector_obj.forbidden
+            self._value = detector.value
+            self._check_type = detector.check_type
+            self._forbidden = detector.forbidden
 
         if self.value is None:
             raise ValueError("The authorized value is not defined")
@@ -301,11 +301,11 @@ class counts(_SeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['cat','cat','dog','dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.counts(n=1)
-    >>> print(my_detector.values)
+    >>> series = pd.Series(['cat','cat','dog','dog','bird'])
+    >>> detector = series.cleaner.detect.counts(n=1)
+    >>> print(detector.values)
     ['cat','dog']
-    >>> print(my_detector.is_error())
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -316,9 +316,9 @@ class counts(_SeriesDetector):
     Use resulting object to apply to another series: only the
     previously detected valid values are considered valid.
 
-    >>> my_series_test = pd.Series(['dog','bird','mouse','cat'])
-    >>> my_detector_test = my_series.cleaner.detect(my_detector)
-    >>> print(my_detector_test.is_error())
+    >>> series_test = pd.Series(['dog','bird','mouse','cat'])
+    >>> detector_test = series.cleaner.detect(detector)
+    >>> print(detector_test.is_error())
     0    False
     1     True
     2     True
@@ -327,9 +327,9 @@ class counts(_SeriesDetector):
 
     The detector can also be used with numerical values:
 
-    >>> my_series_test = pd.Series([5, 3, 3.0, 100, 5])
-    >>> my_detector_test = my_series_test.cleaner.detect.counts(n=1)
-    >>> print(my_detector_test.is_error())
+    >>> series_test = pd.Series([5, 3, 3.0, 100, 5])
+    >>> detector_test = series_test.cleaner.detect.counts(n=1)
+    >>> print(detector_test.is_error())
     0    False
     1    False
     2    False
@@ -339,9 +339,9 @@ class counts(_SeriesDetector):
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['cat',np.nan,'dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.counts(n=1)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat',np.nan,'dog','bird'])
+    >>> detector = series.cleaner.detect.counts(n=1)
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -350,15 +350,15 @@ class counts(_SeriesDetector):
     """
     name = 'counts'
 
-    def __init__(self, obj, detector_obj=None, n=1):
+    def __init__(self, obj, detector=None, n=1):
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             self._n = n
             self._values = self.values
         else:
-            self._n = detector_obj.n
-            self._values = detector_obj._values
+            self._n = detector.n
+            self._values = detector._values
 
         if not isinstance(n, int):
             raise TypeError('n must be a >0 integer')
@@ -427,11 +427,11 @@ class freq(_SeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['cat','cat','dog','dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.freq(freq=.25)
-    >>> print(my_detector.values)
+    >>> series = pd.Series(['cat','cat','dog','dog','bird'])
+    >>> detector = series.cleaner.detect.freq(freq=.25)
+    >>> print(detector.values)
     ['cat','dog']
-    >>> print(my_detector.is_error())
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -442,9 +442,9 @@ class freq(_SeriesDetector):
     Use resulting object to apply to another series: only the
     previously detected valid values are considered valid.
 
-    >>> my_series_test = pd.Series(['dog','bird','mouse','cat'])
-    >>> my_detector_test = my_series.cleaner.detect(my_detector)
-    >>> print(my_detector_test.is_error())
+    >>> series_test = pd.Series(['dog','bird','mouse','cat'])
+    >>> detector_test = series.cleaner.detect(detector)
+    >>> print(detector_test.is_error())
     0    False
     1     True
     2     True
@@ -453,9 +453,9 @@ class freq(_SeriesDetector):
 
     The detector can also be used with numerical values:
 
-    >>> my_series_test = pd.Series([5, 3, 3.0, 100, 5])
-    >>> my_detector_test = my_series_test.cleaner.detect.freq(freq=0.25)
-    >>> print(my_detector_test.is_error())
+    >>> series_test = pd.Series([5, 3, 3.0, 100, 5])
+    >>> detector_test = series_test.cleaner.detect.freq(freq=0.25)
+    >>> print(detector_test.is_error())
     0    False
     1    False
     2    False
@@ -465,9 +465,9 @@ class freq(_SeriesDetector):
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['cat','cat', np.nan, 'dog', 'dog','bird'])
-    >>> my_detector = my_series.cleaner.detect.counts(n=1)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['cat','cat', np.nan, 'dog', 'dog','bird'])
+    >>> detector = series.cleaner.detect.counts(n=1)
+    >>> print(detector.is_error())
     0    False
     1    False
     2    False
@@ -478,17 +478,17 @@ class freq(_SeriesDetector):
     """
     name = 'freq'
 
-    def __init__(self, obj, detector_obj=None, freq=0.1):
+    def __init__(self, obj, detector=None, freq=0.1):
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             if not isinstance(freq, float):
                 raise TypeError('freq must be a float')
             self._freq = freq
             self._values = self.values
         else:
-            self._freq = detector_obj.freq
-            self._values = detector_obj._values
+            self._freq = detector.freq
+            self._values = detector._values
 
         if (self.freq <= 0) or (self.freq >= 1):
             raise TypeError('freq must be in the range ]0;1[')
@@ -573,10 +573,10 @@ class associations(_TwoColsCategoricalDataFramesDetector):
 
     name = "associations"
 
-    def __init__(self, obj, detector_obj=None, count=None, freq=None):
+    def __init__(self, obj, detector=None, count=None, freq=None):
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             if ((freq is None) and (count is None)) or ((freq is not None) and (count is not None)):
                 raise ValueError("Either freq or count must be provided")
 
@@ -597,9 +597,9 @@ class associations(_TwoColsCategoricalDataFramesDetector):
                                                    self.limit,
                                                    )
         else:
-            self._count = detector_obj.count
-            self._freq = detector_obj.freq
-            self._valid_associations = detector_obj.valid_associations
+            self._count = detector.count
+            self._freq = detector.freq
+            self._valid_associations = detector.valid_associations
 
     @property
     def count(self):

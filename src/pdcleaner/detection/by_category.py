@@ -49,14 +49,14 @@ class ByCategoryDataFrameDetector(_NumericalAndCategoricalDataFramesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  method=None,
                  method_kwargs=None
                  ):
 
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             self._method = method
             self._method_kwargs = method_kwargs
         else:

@@ -31,9 +31,9 @@ class email(pattern):
     Examples
     --------
 
-    >>> my_series = pd.Series(['john_856_doe@gmail.com','john_doe','np.nan','john?doe@gmail.com'])
-    >>> my_detector = my_series.cleaner.detect.email()
-    >>> print(my_detector.detected)
+    >>> series = pd.Series(['john_856_doe@gmail.com','john_doe','np.nan','john?doe@gmail.com'])
+    >>> detector = series.cleaner.detect.email()
+    >>> print(detector.detected)
     1              john_doe
     2                np.nan
     3    john?doe@gmail.com
@@ -42,9 +42,9 @@ class email(pattern):
 
     name = 'email'
 
-    def __init__(self, obj, detector_obj=None):
+    def __init__(self, obj, detector=None):
         pattern_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-        super().__init__(obj, detector_obj, pattern=pattern_email, mode="fullmatch")
+        super().__init__(obj, detector, pattern=pattern_email, mode="fullmatch")
 
     @property
     def _reported(self):
@@ -77,19 +77,19 @@ class url(pattern):
     Examples
     --------
 
-    >>> my_series = pd.Series([
+    >>> series = pd.Series([
         'google.com','https://www.google.com/', 'https://127.0.0.1:80', 'dummy'])
-    >>> my_detector = my_series.cleaner.detect.url()
-    >>> print(my_detector.detected)
+    >>> detector = series.cleaner.detect.url()
+    >>> print(detector.detected)
     0    google.com
     3         dummy
     dtype: object
 
     If protocol is not mandatory
 
-    >>> my_series = pd.Series(['google.com','https://www.google.com/'])
-    >>> my_detector = my_series.cleaner.detect('url', check_protocol=False)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['google.com','https://www.google.com/'])
+    >>> detector = series.cleaner.detect('url', check_protocol=False)
+    >>> print(detector.is_error())
     0   False
     1   False
     dtype: bool
@@ -97,12 +97,12 @@ class url(pattern):
 
     name = 'url'
 
-    def __init__(self, obj, detector_obj=None, check_protocol=True):
+    def __init__(self, obj, detector=None, check_protocol=True):
 
-        if detector_obj is None:
+        if detector is None:
             self._check_protocol = check_protocol
         else:
-            self._check_protocol = detector_obj.check_protocol
+            self._check_protocol = detector.check_protocol
 
         pattern_url = re.compile(
             (r'^(?:http|ftp)s?://' if check_protocol else
@@ -114,7 +114,7 @@ class url(pattern):
             r'(?::\d+)?'  # optional port
             r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
-        super().__init__(obj, detector_obj, pattern=pattern_url, mode="fullmatch")
+        super().__init__(obj, detector, pattern=pattern_url, mode="fullmatch")
 
     @property
     def check_protocol(self):
@@ -146,9 +146,9 @@ class ping(_ObjectTypeSeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series(['google.com','https://www.google.com/', 'dummy'])
-    >>> my_detector = my_series.cleaner.detect.ping()
-    >>> print(my_detector.detected)
+    >>> series = pd.Series(['google.com','https://www.google.com/', 'dummy'])
+    >>> detector = series.cleaner.detect.ping()
+    >>> print(detector.detected)
     0    google.com
     2         dummy
     dtype: object
@@ -156,7 +156,7 @@ class ping(_ObjectTypeSeriesDetector):
 
     name = 'ping'
 
-    def __init__(self, obj, detector_obj=None):
+    def __init__(self, obj, detector=None):
         # pylint: disable=unused-argument
         super().__init__(obj)
 

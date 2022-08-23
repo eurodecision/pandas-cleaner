@@ -121,10 +121,10 @@ class _ErrorsDetectAndClean:
 
             if isinstance(args[0], _Detector):
                 method = args[0].name
-                detector_obj = args[0]
+                detector = args[0]
             elif isinstance(args[0], str):
                 method = args[0]
-                detector_obj = None
+                detector = None
             else:
                 raise TypeError(f"{args[0]} is not "
                                 "a valid argument for detect")
@@ -139,7 +139,7 @@ class _ErrorsDetectAndClean:
                 if is_nums_and_cat_df(self._obj):
                     detector_instance = \
                         detection_classes['by_category'](self._obj,
-                                                         detector_obj=detector_obj,
+                                                         detector=detector,
                                                          method=method,
                                                          method_kwargs=kwargs)
                 else:
@@ -148,7 +148,7 @@ class _ErrorsDetectAndClean:
             else:
                 detector_instance = \
                     detection_classes[method](self._obj,
-                                              detector_obj=detector_obj,
+                                              detector=detector,
                                               **kwargs)
 
             return detector_instance
@@ -171,13 +171,13 @@ class _ErrorsDetectAndClean:
         def __init__(self, obj):
             self._obj = obj
 
-        def __call__(self, method, detector_obj, **kwargs):
+        def __call__(self, method, detector, **kwargs):
             """The function called when CleanerAccessor class is called.
             Mainly, when cleaner.clean is invoked
 
             Args:
               method (str): The cleaning method to be used.
-              detector_obj (_Detector) : The detector used to spot the errors
+              detector (_Detector) : The detector used to spot the errors
               **kwargs: keyword arguments passed to the cleaning method.
 
             Returns:
@@ -200,17 +200,17 @@ class _ErrorsDetectAndClean:
 
             cleaned_obj = \
                 series_cleaning_methods[method](self,
-                                                detector_obj=detector_obj,
+                                                detector=detector,
                                                 **kwargs)
             return cleaned_obj
 
-    def detected(self, detector_obj):
+    def detected(self, detector):
         """Returns the errors detected by a detector"""
-        return self._obj[detector_obj.is_error()]
+        return self._obj[detector.is_error()]
 
-    def valid(self, detector_obj):
+    def valid(self, detector):
         """Returns the values considered as valid (not errors) by a detector"""
-        return self._obj[detector_obj.not_error()]
+        return self._obj[detector.not_error()]
 
 
 # Register detection methods

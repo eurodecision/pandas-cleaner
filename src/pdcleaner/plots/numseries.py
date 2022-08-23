@@ -49,9 +49,9 @@ def plot(self,
     Examples
     --------
 
-    >>> my_series = pd.Series([-5, 1, 2 , 3, 8, 12])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=0, upper=10)
-    >>> my_detector.plot()
+    >>> series = pd.Series([-5, 1, 2 , 3, 8, 12])
+    >>> detector = series.cleaner.detect.bounded(lower=0, upper=10)
+    >>> detector.plot()
 
     .. image:: ../../_static/plot_numseries.png
     """

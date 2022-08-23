@@ -61,9 +61,9 @@ class bounded(_NumericalSeriesDetector):
     Examples
     --------
 
-    >>> my_series = pd.Series([1, 2, 100, 3])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=2, upper=4)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([1, 2, 100, 3])
+    >>> detector = series.cleaner.detect.bounded(lower=2, upper=4)
+    >>> print(detector.is_error())
     0     True
     1    False
     2     True
@@ -72,9 +72,9 @@ class bounded(_NumericalSeriesDetector):
 
     With only one bound specified
 
-    >>> my_series = pd.Series([1, 2, 100, 3])
-    >>> my_detector = my_series.cleaner.detect.bounded(upper=4)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([1, 2, 100, 3])
+    >>> detector = series.cleaner.detect.bounded(upper=4)
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -83,9 +83,9 @@ class bounded(_NumericalSeriesDetector):
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series([1, np.nan, 100, 3])
-    >>> my_detector = my_series.cleaner.detect.bounded(lower=2, upper=4)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series([1, np.nan, 100, 3])
+    >>> detector = series.cleaner.detect.bounded(lower=2, upper=4)
+    >>> print(detector.is_error())
     0     True
     1    False
     2     True
@@ -102,7 +102,7 @@ class bounded(_NumericalSeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  lower=np.NINF,
                  upper=np.inf,
                  inclusive="both"
@@ -113,17 +113,17 @@ class bounded(_NumericalSeriesDetector):
         raise_if_not_in(inclusive, legal_values,
                         f"inclusive must be in {legal_values}")
 
-        if not detector_obj:
+        if not detector:
             self._lower = lower
             self._upper = upper
             self._inclusive = inclusive
             self._sided = "both"
         else:
 
-            self._lower = detector_obj.lower
-            self._upper = detector_obj.upper
-            self._inclusive = detector_obj.inclusive
-            self._sided = detector_obj.sided
+            self._lower = detector.lower
+            self._upper = detector.upper
+            self._inclusive = detector.inclusive
+            self._sided = detector.sided
 
         self._raise_if_non_numeric_bounds()
 
@@ -223,9 +223,9 @@ class length(_SeriesDetector):
     >>> import pandas as pd
     >>> import pdcleaner
 
-    >>> my_series = pd.Series(['75013','78000' , '931204', '952684'], dtype='string')
-    >>> my_detector = my_series.cleaner.detect.length(value=5)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['75013','78000' , '931204', '952684'], dtype='string')
+    >>> detector = series.cleaner.detect.length(value=5)
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -234,9 +234,9 @@ class length(_SeriesDetector):
 
     with two bounds specified
 
-    >>> my_series = pd.Series(['1','001' , '01460', '0011448'], dtype='string')
-    >>> my_detector = my_series.cleaner.detect.length(lower=2, upper=6)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['1','001' , '01460', '0011448'], dtype='string')
+    >>> detector = series.cleaner.detect.length(lower=2, upper=6)
+    >>> print(detector.is_error())
     0    True
     1    False
     2    False
@@ -245,9 +245,9 @@ class length(_SeriesDetector):
 
     Can be used with integers
 
-    >>> my_series = pd.Series([1, 1234567 , 1460, np.nan])
-    >>> my_detector = my_series.cleaner.detect.length(upper=6)
-    >>> my_detector.is_error()
+    >>> series = pd.Series([1, 1234567 , 1460, np.nan])
+    >>> detector = series.cleaner.detect.length(upper=6)
+    >>> detector.is_error()
     0    False
     1     True
     2    False
@@ -256,9 +256,9 @@ class length(_SeriesDetector):
 
     and with floats
 
-    >>> my_series = pd.Series([1.007, 1.234567 , 1.460], dtype='float64')
-    >>> my_detector = my_series.cleaner.detect.length(upper=6)
-    >>> my_detector.is_error()
+    >>> series = pd.Series([1.007, 1.234567 , 1.460], dtype='float64')
+    >>> detector = series.cleaner.detect.length(upper=6)
+    >>> detector.is_error()
     0    False
     1     True
     2    False
@@ -266,9 +266,9 @@ class length(_SeriesDetector):
 
     Missing values are not treated as errors.
 
-    >>> my_series = pd.Series(['1','001' , '01460', np.nan], dtype='string')
-    >>> my_detector = my_series.cleaner.detect.length(upper=6)
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['1','001' , '01460', np.nan], dtype='string')
+    >>> detector = series.cleaner.detect.length(upper=6)
+    >>> print(detector.is_error())
     0     False
     1     False
     2     False
@@ -288,7 +288,7 @@ class length(_SeriesDetector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  lower=np.NINF,
                  upper=np.inf,
                  value=np.inf,
@@ -300,16 +300,16 @@ class length(_SeriesDetector):
         raise_if_not_in(inclusive, legal_values,
                         f"inclusive must be in {legal_values}")
 
-        if not detector_obj:
+        if not detector:
             self._lower = lower
             self._upper = upper
             self._value = value
             self._inclusive = inclusive
         else:
-            self._lower = detector_obj.lower
-            self._upper = detector_obj.upper
-            self._value = detector_obj.value
-            self._inclusive = detector_obj.inclusive
+            self._lower = detector.lower
+            self._upper = detector.upper
+            self._value = detector.value
+            self._inclusive = detector.inclusive
 
         self._raise_if_non_numeric_bounds()
 
@@ -407,8 +407,8 @@ class missing(_Detector):
 
     >>> df = pd.DataFrame({'col1' : ['Alice', 'Bob', 'Charles'],
                            'col2' : [15, np.nan, 11] })
-    >>> my_detector = df.cleaner.detect.missing(how='any')
-    >>> print(my_detector.is_error())
+    >>> detector = df.cleaner.detect.missing(how='any')
+    >>> print(detector.is_error())
     0    False
     1    True
     2    False
@@ -418,8 +418,8 @@ class missing(_Detector):
 
     >>> df = pd.DataFrame({'col1' : ['Alice', np.nan, 'Charles'],
                            'col2' : [np.nan, np.nan, np.nan] })
-    >>> my_detector = df.cleaner.detect.missing(how='all')
-    >>> print(my_detector.is_error())
+    >>> detector = df.cleaner.detect.missing(how='all')
+    >>> print(detector.is_error())
     0    False
     1    True
     2    False
@@ -427,9 +427,9 @@ class missing(_Detector):
 
     Can be used with series. 'how' parameter is not necessary
 
-    >>> my_series = pd.Series(['Alice', 'Bob', np.nan, 'Charles'])
-    >>> my_detector = my_series.cleaner.detect('missing')
-    >>> print(my_detector.is_error())
+    >>> series = pd.Series(['Alice', 'Bob', np.nan, 'Charles'])
+    >>> detector = series.cleaner.detect('missing')
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -441,7 +441,7 @@ class missing(_Detector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  how='any',
                  ):
         super().__init__(obj)
@@ -449,10 +449,10 @@ class missing(_Detector):
         legal_values = ["any", "all"]
         raise_if_not_in(how, legal_values, f"how parameter must be {' or '.join(legal_values)}")
 
-        if not detector_obj:
+        if not detector:
             self._how = how
         else:
-            self._how = detector_obj.how
+            self._how = detector.how
 
         self._type = type(obj)
 
@@ -518,8 +518,8 @@ class duplicated(_Detector):
 
     >>> df = pd.DataFrame({'col1' : ['Alice', 'Bob', 'Alice', 'Bob', 'Alice'],
                            'col2' : [15, 13, 15, 10, 13] })
-    >>> my_detector = df.cleaner.detect.duplicated(subset=['col1', 'col2'], keep='first')
-    >>> print(my_detector.is_error())
+    >>> detector = df.cleaner.detect.duplicated(subset=['col1', 'col2'], keep='first')
+    >>> print(detector.is_error())
     0    False
     1    False
     2     True
@@ -527,8 +527,8 @@ class duplicated(_Detector):
     4    False
     dtype: bool
 
-    >>> my_detector = df.cleaner.detect.duplicated(subset=['col1'], keep='last')
-    >>> print(my_detector.is_error())
+    >>> detector = df.cleaner.detect.duplicated(subset=['col1'], keep='last')
+    >>> print(detector.is_error())
     0     True
     1     True
     2     True
@@ -541,18 +541,18 @@ class duplicated(_Detector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  subset=None,
                  keep='first'
                  ):
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             self._subset = subset
             self._keep = keep
         else:
-            self._subset = detector_obj.subset
-            self._keep = detector_obj.keep
+            self._subset = detector.subset
+            self._keep = detector.keep
 
     @property
     def subset(self) -> list:
@@ -646,16 +646,16 @@ class custom(_Detector):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  error_func=None,
                  ):
 
         super().__init__(obj)
 
-        if not detector_obj:
+        if not detector:
             self._error_func = error_func
         else:
-            self._error_func = detector_obj.error_func
+            self._error_func = detector.error_func
 
         if self.error_func is None:
             raise ValueError('error_func must be defined')
@@ -740,7 +740,7 @@ class quantiles(bounded):
 
     def __init__(self,
                  obj,
-                 detector_obj=None,
+                 detector=None,
                  lowerq=0,
                  upperq=1,
                  inclusive="both"
@@ -754,7 +754,7 @@ class quantiles(bounded):
 
         _raise_if_invalid_sided_or_inclusive_args(inclusive=inclusive)
 
-        if not detector_obj:
+        if not detector:
             self._lowerq = lowerq
             self._upperq = upperq
             self._lower = self._obj.quantile(self.lowerq)
@@ -762,12 +762,12 @@ class quantiles(bounded):
             self._inclusive = inclusive
             self._sided = "both"
         else:
-            self._lowerq = detector_obj.lowerq
-            self._upperq = detector_obj.upperq
-            self._lower = detector_obj.lower
-            self._upper = detector_obj.upper
-            self._inclusive = detector_obj.inclusive
-            self._sided = detector_obj._sided
+            self._lowerq = detector.lowerq
+            self._upperq = detector.upperq
+            self._lower = detector.lower
+            self._upper = detector.upper
+            self._inclusive = detector.inclusive
+            self._sided = detector._sided
 
         if (self._lowerq == 0) & (self._upperq == 1):
             warnings.warn("Neither lower or upper quantile specified")
