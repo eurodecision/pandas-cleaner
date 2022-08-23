@@ -143,12 +143,15 @@ class castable(_SeriesDetector):
     when they can not be converted (casted) into a given type.
 
     For example,
-    + '1.2' is not castable as an integer
-    + 'ABC' is not castable as a number/float
-    + '2022-02-28' is castable as a date, but '2022-02-31' is not
+
+    + ``1.2`` is not castable as an integer
+
+    + ``ABC`` is not castable as a number/float
+
+    + ``2022-02-28`` is castable as a date, but ``2022-02-31`` is not
 
     The expected thousands and decimal separators can be customized, so that,
-    for example: '100,000.0' can be seen as 100000.
+    for example: ``100,000.0`` can be seen as 100000.
 
     Note
     ----
@@ -172,7 +175,8 @@ class castable(_SeriesDetector):
     ------
     ValueError
         When target is not among the allowed values, or target is not defined.
-        When detector is applied to float, int series
+    ValueError
+        When detector is applied to ``float`` or ``int`` series
 
 
     Examples
