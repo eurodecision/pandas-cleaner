@@ -335,4 +335,3 @@ def series_with_boolean():
 def series_with_datetime():
     """Create a dummy series containing date elements"""
     return pd.to_datetime(pd.Series(['2022-10-01', '2021-06-11', '2019-04-03', ' 2020-09-25']))
-
