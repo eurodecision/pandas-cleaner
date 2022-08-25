@@ -146,12 +146,13 @@ def drop(self, detector, inplace=False):
     >>> df_detector = df["col1"].cleaner.detect.bounded(lower=0, upper=10)
     >>> df["col1"].cleaner.clean.drop(df_detector, inplace=True)
     """
-    series = detector.obj
 
     if inplace:
-        if series._get_cacher() is not None:
-            warnings.warn("Series is a column of a DataFrame. "
-                          "Dropping inplace will not modify the DataFrame.")
+
+        if isinstance(detector.obj, pd.Series):
+            if detector.obj._get_cacher() is not None:
+                warnings.warn("Series is a column of a DataFrame. "
+                              "Dropping inplace will not modify the DataFrame.")
 
         self._obj.drop(detector.index, inplace=True)
         return None

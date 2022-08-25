@@ -1,8 +1,6 @@
-import pytest
-
 import numpy as np
 import pandas as pd
-from pandas.testing import assert_series_equal, assert_frame_equal
+from pandas.testing import assert_series_equal
 
 
 def test_replace_num_series(series_with_outlier):
