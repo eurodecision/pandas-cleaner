@@ -645,7 +645,7 @@ class associations(_TwoColsCategoricalDataFramesDetector):
                                )
 
         gt_than_limit = (crosstab > limit).stack().reset_index()
-        errors = df.merge(gt_than_limit, on=[col1, col2]).iloc[:, -1]
+        errors = df.merge(gt_than_limit, on=[col1, col2], how='left').iloc[:, -1].fillna(False)
 
         assoc = (
             df[errors]
