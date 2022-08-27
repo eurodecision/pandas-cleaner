@@ -1,3 +1,6 @@
+from distutils.log import warn
+import warnings
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,6 +9,7 @@ import seaborn as sns
 from pdcleaner.utils.utils import add_method
 from pdcleaner.detection._base import _NumericalSeriesDetector
 
+MAX_SIZE = int(5e4)
 
 @add_method(_NumericalSeriesDetector, 'plot')
 def plot(self,
@@ -71,6 +75,10 @@ def plot(self,
         palette = [color, errors_color]
 
     linestyle = ':'
+
+    if len(df) > MAX_SIZE:
+        df = df.sample(n=MAX_SIZE)
+        warnings.warn(f"Plot has been limited to {MAX_SIZE} rows for performance issues")
 
     sns.scatterplot(data=df,
                     x=df.index,
