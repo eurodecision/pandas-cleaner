@@ -454,7 +454,7 @@ def strip(self, detector):
     Examples
     --------
     >>> series = pd.Series(['Paris','Paris ',' Lille', ' Lille ', 'Troyes'])
-    >>> detector = series.cleaner.detect.spaces(side='right')
+    >>> detector = series.cleaner.detect.spaces(side='trailing')
     >>> series.cleaner.clean.strip(detector)
     0    Paris
     1    Paris
@@ -478,9 +478,9 @@ def strip(self, detector):
 
     series = detector.obj
 
-    if detector.side == 'left':
+    if detector.side == 'leading':
         series = series.str.lstrip()
-    elif detector.side == 'right':
+    elif detector.side == 'trailing':
         series = series.str.rstrip()
     elif detector.side == 'both':
         series = series.str.strip()
