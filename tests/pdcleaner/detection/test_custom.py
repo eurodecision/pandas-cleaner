@@ -1,7 +1,5 @@
 """Unit tests for custom detector"""
 
-from http.client import EXPECTATION_FAILED
-from unittest import expectedFailure
 import pytest
 import pandas as pd
 

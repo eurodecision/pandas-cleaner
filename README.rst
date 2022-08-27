@@ -78,7 +78,7 @@ Check the potential errors that have been detected
 
 .. code-block:: python
 
-   detector.detected
+   detector.detected()
 
 .. parsed-literal::
 

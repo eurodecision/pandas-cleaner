@@ -40,7 +40,7 @@ class ByCategoryDataFrameDetector(_NumericalAndCategoricalDataFramesDetector):
             'col2' : ['I'] * 11 + ["II"] * 10
             })
     >>> detector = df.cleaner.detect('iqr')
-    >>> print(detector.detected)
+    >>> print(detector.detected())
         col1 col2
     10    5    1
     """

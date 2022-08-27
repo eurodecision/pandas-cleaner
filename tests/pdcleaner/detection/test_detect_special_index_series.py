@@ -25,7 +25,7 @@ def test_alphabetic_index_not_error(series_alpha_index):
 
 def test_alphabetic_index_detected(series_alpha_index):
     detector = series_alpha_index.cleaner.detect.bounded(lower=2, upper=4)
-    actual = detector.detected
+    actual = detector.detected()
     expected = pd.Series([1, 100], index=["a", "c"])
     assert_series_equal(actual, expected)
 
@@ -46,6 +46,6 @@ def test_unordered_numeric_index_not_error(series_unsorted_idx):
 
 def test_unordered_numeric_index_detected(series_unsorted_idx):
     detector = series_unsorted_idx.cleaner.detect.bounded(lower=2, upper=4)
-    actual = detector.detected
+    actual = detector.detected()
     expected = pd.Series([1, 100], index=[12, 5])
     assert_series_equal(actual, expected)
