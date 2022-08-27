@@ -25,12 +25,10 @@ class _Detector():
         """The object (Series or DataFrame) containing the data to which the detection is applied"""
         return self._obj
 
-    @property
     def detected(self):
         """Series or DataFrame containing only the detected errors"""
         return self._obj.loc[self.index]
 
-    @property
     def valid(self):
         """Series or DataFrame containing only the valid values"""
         return self._obj[self.not_error()]

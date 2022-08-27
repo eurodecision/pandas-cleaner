@@ -92,7 +92,7 @@ def test_errors_detected_with_freq(df_two_cat_cols):
     detector = df_two_cat_cols.cleaner.detect.associations(freq=0.05)
     expected_detected = pd.DataFrame({'col1': 'B', 'col2': 'a'}, index=[19])
     expected_errors = pd.Series([False] * 19 + [True])
-    assert_frame_equal(detector.detected, expected_detected)
+    assert_frame_equal(detector.detected(), expected_detected)
     assert_series_equal(detector.is_error(), expected_errors)
 
 
@@ -102,7 +102,7 @@ def test_errors_detected_with_count(df_two_cat_cols):
                                       'col2': ['c', 'c', 'a']},
                                      index=[8, 9, 19]
                                      )
-    assert_frame_equal(detector.detected, expected_detected)
+    assert_frame_equal(detector.detected(), expected_detected)
 
 
 def test_from_existing(df_two_cat_cols):

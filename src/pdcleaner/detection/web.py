@@ -33,7 +33,7 @@ class email(pattern):
 
     >>> series = pd.Series(['john_856_doe@gmail.com','john_doe','np.nan','john?doe@gmail.com'])
     >>> detector = series.cleaner.detect.email()
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     1              john_doe
     2                np.nan
     3    john?doe@gmail.com
@@ -80,7 +80,7 @@ class url(pattern):
     >>> series = pd.Series([
         'google.com','https://www.google.com/', 'https://127.0.0.1:80', 'dummy'])
     >>> detector = series.cleaner.detect.url()
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     0    google.com
     3         dummy
     dtype: object
@@ -148,7 +148,7 @@ class ping(_ObjectTypeSeriesDetector):
 
     >>> series = pd.Series(['google.com','https://www.google.com/', 'dummy'])
     >>> detector = series.cleaner.detect.ping()
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     0    google.com
     2         dummy
     dtype: object

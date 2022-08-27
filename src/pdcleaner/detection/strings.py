@@ -58,7 +58,7 @@ class pattern(_ObjectTypeSeriesDetector):
 
     >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
     >>> detector = series.cleaner.detect.pattern(pattern=r"[a-z]*", mode='fullmatch')
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     0    Cat
     4     14
     dtype: object
@@ -67,7 +67,7 @@ class pattern(_ObjectTypeSeriesDetector):
 
     >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
     >>> detector = series.cleaner.detect.values(pattern=r"d", mode='contains')
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     0    Cat
     1    cat
     4     14
@@ -78,7 +78,7 @@ class pattern(_ObjectTypeSeriesDetector):
 
     >>> series = pd.Series(['Cat','cat','dog','bird','14',np.nan,""])
     >>> detector = series.cleaner.detect.values(pattern=r"cat|dog", mode='match', case=False)
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     3    bird
     4      14
     6
@@ -92,7 +92,7 @@ class pattern(_ObjectTypeSeriesDetector):
     >>> regex = re.compile(r"[a-z]*")
     >>> detector = series.cleaner.detect.pattern(pattern=regex, mode='fullmatch', case=True)
     ... UserWarning: case and flag are ignored with a compiled regex
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     0    Cat
     4     14
     dtype: object

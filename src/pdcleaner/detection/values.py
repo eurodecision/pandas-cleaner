@@ -54,7 +54,7 @@ class enum(_SeriesDetector):
 
     >>> series = pd.Series([5, 5.0, 10, 3])
     >>> detector = series.cleaner.detect.enum(values=[5,3])
-    >>> print(detector.detected)
+    >>> print(detector.detected())
     2    10.0
     dtype: float64
 
@@ -559,12 +559,12 @@ class associations(_TwoColsCategoricalDataFramesDetector):
         })
 
     >>> detector = df.cleaner.detect.associations(freq=0.05)
-    >>> print(detector.detected)
+    >>> print(detector.detected())
         col1 col2
     19    B    a
 
     >>> detector = df.cleaner.detect.associations(count=3)
-    >>> print(detector.detected)
+    >>> print(detector.detected())
         col1 col2
     8     A    c
     9     A    c

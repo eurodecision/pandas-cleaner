@@ -56,7 +56,7 @@ def test_type_error_parameter_min_samples(anscombe):
 def test_anscombe_i(anscombe):
     df = subset(anscombe, 'I')
     detector = df.cleaner.detect.outliers()
-    print(detector.detected)
+    print(detector.detected())
     assert detector.has_errors() is False
 
 
