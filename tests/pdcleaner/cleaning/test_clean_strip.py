@@ -5,15 +5,15 @@ import pandas as pd
 from pandas.testing import assert_series_equal
 
 
-def test_clean_strip_left(series_with_extra_spaces):
-    detector = series_with_extra_spaces.cleaner.detect.spaces(side='left')
+def test_clean_strip_leading(series_with_extra_spaces):
+    detector = series_with_extra_spaces.cleaner.detect.spaces(side='leading')
     cleaned = series_with_extra_spaces.cleaner.clean.strip(detector)
     expected = pd.Series(['Paris', 'Paris ', 'Lille', 'Lille ', 'Troyes'])
     assert_series_equal(cleaned, expected)
 
 
-def test_clean_strip_right(series_with_extra_spaces):
-    detector = series_with_extra_spaces.cleaner.detect.spaces(side='right')
+def test_clean_strip_trailing(series_with_extra_spaces):
+    detector = series_with_extra_spaces.cleaner.detect.spaces(side='trailing')
     cleaned = series_with_extra_spaces.cleaner.clean.strip(detector)
     expected = pd.Series(['Paris', 'Paris', ' Lille', ' Lille', 'Troyes'])
     assert_series_equal(cleaned, expected)

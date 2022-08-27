@@ -339,7 +339,7 @@ class spaces(_ObjectTypeSeriesDetector):
 
     Parameters
     ----------
-    side: {'left', 'right', 'both'} (Default = 'both')
+    side: {'leading', 'trailing', 'both'} (Default = 'both')
         The side where extraspaces will be detected
 
     Raises
@@ -354,7 +354,7 @@ class spaces(_ObjectTypeSeriesDetector):
     Examples
     --------
     >>> series = pd.Series(['Paris','Paris ',' Lille', ' Lille ', 'Troyes'])
-    >>> detector = series.cleaner.detect.spaces(side='left')
+    >>> detector = series.cleaner.detect.spaces(side='leading')
     >>> print(detector.is_error())
     0    False
     1    False
@@ -363,7 +363,7 @@ class spaces(_ObjectTypeSeriesDetector):
     4    False
     dtype: bool
 
-    >>> detector = series.cleaner.detect.spaces(side='right')
+    >>> detector = series.cleaner.detect.spaces(side='trailing')
     >>> print(detector.is_error())
     0    False
     1     True
@@ -390,7 +390,7 @@ class spaces(_ObjectTypeSeriesDetector):
                  ):
         super().__init__(obj)
 
-        legal_values = ["left", "right", "both"]
+        legal_values = ["leading", "trailing", "both"]
         raise_if_not_in(side, legal_values, f"Parameter side must be {' or '.join(legal_values)}")
 
         if not detector:
@@ -406,9 +406,9 @@ class spaces(_ObjectTypeSeriesDetector):
     @property
     def index(self) -> pd.Index:
         """Indices of the rows detected as errors"""
-        if self.side == "left":
+        if self.side == "leading":
             mask = self._obj.apply(lambda x: x.startswith(" "))
-        elif self.side == "right":
+        elif self.side == "trailing":
             mask = self._obj.apply(lambda x: x.endswith(" "))
         elif self.side == "both":
             mask = self._obj.apply(lambda x: (x.startswith(" ") or x.endswith(" ")))

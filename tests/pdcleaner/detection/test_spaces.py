@@ -12,8 +12,8 @@ def test_detect_call_as_parameter(series_with_extra_spaces):
 
 
 def test_detect_call_as_method(series_with_extra_spaces):
-    detect_results = series_with_extra_spaces.cleaner.detect.spaces(side='left')
-    assert detect_results.side == 'left'
+    detect_results = series_with_extra_spaces.cleaner.detect.spaces(side='leading')
+    assert detect_results.side == 'leading'
 
 
 def test_detect_with_both_parameter(series_with_extra_spaces):
@@ -22,26 +22,26 @@ def test_detect_with_both_parameter(series_with_extra_spaces):
     assert_series_equal(detect_results.is_error(), expected)
 
 
-def test_detect_with_left_parameter(series_with_extra_spaces):
-    detect_results = series_with_extra_spaces.cleaner.detect.spaces(side='left')
+def test_detect_with_leading_parameter(series_with_extra_spaces):
+    detect_results = series_with_extra_spaces.cleaner.detect.spaces(side='leading')
     expected = pd.Series([False, False, True, True, False])
     assert_series_equal(detect_results.is_error(), expected)
 
 
-def test_detect_with_right_parameter(series_with_extra_spaces):
-    detect_results = series_with_extra_spaces.cleaner.detect.spaces(side='right')
+def test_detect_with_trailing_parameter(series_with_extra_spaces):
+    detect_results = series_with_extra_spaces.cleaner.detect.spaces(side='trailing')
     expected = pd.Series([False, True, False, True, False])
     assert_series_equal(detect_results.is_error(), expected)
 
 
 def test_with_unknown_parameter(series_with_extra_spaces):
-    msg = "Parameter side must be left or right or both"
+    msg = "Parameter side must be leading or trailing or both"
     with pytest.raises(ValueError, match=msg):
         series_with_extra_spaces.cleaner.detect.spaces(side='east')
 
 
 def test_side_from_existing_detector(series_with_extra_spaces):
-    detector = series_with_extra_spaces.cleaner.detect.spaces(side='right')
+    detector = series_with_extra_spaces.cleaner.detect.spaces(side='trailing')
     series = pd.Series([' Paris'])
     detector2 = series.cleaner.detect(detector)
     assert detector2.side == detector.side
