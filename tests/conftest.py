@@ -163,6 +163,17 @@ def altern_test_series():
                       'Bill Gates'
                       ])
 
+@pytest.fixture
+def altern_series_first():
+    """Categorical series with alternative formulations for the same person.
+    In this case, the first encountered is not the most frequent"""
+    return pd.Series(['Linus Torvalds',
+                    'linus.torvalds',
+                    'Torvalds, Linus',
+                    'Torvalds, Linus',
+                    'Bill Gates',
+                    ])
+
 
 @pytest.fixture
 def altern_plot_series():

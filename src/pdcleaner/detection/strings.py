@@ -199,9 +199,14 @@ class alternatives(_ObjectTypeSeriesDetector):
     As for now, the only available method is the fingerprinting method, explained in [1].
     In the aforementioned example, all strings would have the same key: 'linus torvalds'
 
-    The detector flags values with a given key but not the most frequent formulation as errors.
+    Depending on the value of the keyword ``keep``, the detector flags as errors values:
+    
+    + that are noy not the most frequent formulation (if ``keep=='mode'``, by default)
 
-    A dictionary associating the keys and the most frequent associated values is produced.
+    + that are not similar to the first one encountered (``if keep=='first'``). This can prove
+      useful when new data with a slightly different formatting are added to a dataset.
+
+    A dictionary associating the keys and the valid associated values is produced.
     {'linus torvalds': 'Linus Torvalds', ...}
 
     Reference
@@ -212,11 +217,15 @@ class alternatives(_ObjectTypeSeriesDetector):
     ----------
     keys: str (Default = 'fingerprint')
         method for generating the keys. Only 'fingerprint' currently available
+    keep: str (Default = 'mode')
+        which alternative representation shoud be kept ? The most frequent (``mode``) or the ``first`` one?
 
     Raises
     ------
     ValueError
-        when keys is not 'fingerprint'
+        when ``keys`` is not 'fingerprint'
+    ValueError
+        if ``keep`` is neither ``mode`` nor ``first``
 
     Note
     ----
@@ -251,7 +260,7 @@ class alternatives(_ObjectTypeSeriesDetector):
     """
     name = 'alternatives'
 
-    def __init__(self, obj, detector=None, keys='fingerprint'):
+    def __init__(self, obj, detector=None, keys='fingerprint', keep='mode'):
         super().__init__(obj)
 
         if not isinstance(keys, str):
@@ -260,12 +269,22 @@ class alternatives(_ObjectTypeSeriesDetector):
         if keys not in ['fingerprint']:
             raise ValueError('Not a valid method. Only fingerprint method is implemented')
 
+        if keep not in ['mode', 'first']:
+            raise ValueError("keep should have the value 'mode' or 'first'")
+
         if not detector:
+            self._keep = keep
             self._keys = keys
             self._dict_keys = self.dict_keys
         else:
+            self._keep = detector.keep
             self._keys = detector.keys
             self._dict_keys = detector.dict_keys
+
+    @property
+    def keep(self):
+        """Returns the value of the keyword keep"""
+        return self._keep
 
     @property
     def keys(self):
@@ -274,14 +293,18 @@ class alternatives(_ObjectTypeSeriesDetector):
 
     @property
     def dict_keys(self) -> dict:
-        """  A python dictionary associating the key with the most frequent formulation
-
+        """  A python dictionary associating the key with keep formulation
         can be used for replacements"""
 
         keys = self.calc_keys(method=self._keys)
 
         df = pd.DataFrame({'orig': self._obj.astype(str), 'keys': keys})
-        group = df.groupby('keys').agg(lambda s: s.value_counts().idxmax())
+
+
+        if self._keep == 'mode':
+            group = df.groupby('keys').agg(lambda s: s.value_counts().idxmax())
+        else: # self._keep = 'first'
+            group = df.groupby('keys').first()
 
         return pd.Series(group.orig.values, index=group.index).to_dict()
 
@@ -323,7 +346,7 @@ class alternatives(_ObjectTypeSeriesDetector):
     @property
     def _reported(self):
         """Properties displayed by the report() method"""
-        return ['keys']
+        return ['keys', 'keep']
 
 
 class spaces(_ObjectTypeSeriesDetector):

@@ -45,3 +45,21 @@ def test_alternatives_dict(altern_series):
     expected = {'linus torvalds': 'Linus Torvalds',
                 'bill gates': 'Bill Gates'}
     assert results == expected
+
+
+def test_alternatives_keep_first(altern_series_first):
+    results = altern_series_first.cleaner.detect.alternatives(keep='first')
+    expected = pd.Series([False, True, True, True, False, ])
+    assert_series_equal(results.is_error(), expected)
+
+
+def test_alternatives_wrong_value_for_keep(altern_series):
+    match = "keep should have the value 'mode' or 'first'"
+    with pytest.raises(ValueError, match=match):
+        altern_series.cleaner.detect.alternatives(keep='toto')
+
+
+def test_alternatives_wrong_type_for_keep(altern_series):
+    match = "keep should have the value 'mode' or 'first'"
+    with pytest.raises(ValueError, match=match):
+        altern_series.cleaner.detect.alternatives(keep=1)
