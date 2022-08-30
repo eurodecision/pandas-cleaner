@@ -183,7 +183,7 @@ class pattern(_ObjectTypeSeriesDetector):
         return ['pattern', 'mode', 'case', 'flags']
 
 
-class keycollision(_ObjectTypeSeriesDetector):
+class alternatives(_ObjectTypeSeriesDetector):
     r"""Detect strings that might be alternative representations of the same thing.
 
     This detection method is typically useful for people names or for brands.
@@ -227,7 +227,7 @@ class keycollision(_ObjectTypeSeriesDetector):
 
     >>> series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus',
                                'Linus Torvalds', 'Bill Gates', ])
-    >>> detector = series.cleaner.detect.keycollision()
+    >>> detector = series.cleaner.detect.alternatives()
     >>> print(detector.is_error())
     0    False
     1    True
@@ -241,7 +241,7 @@ class keycollision(_ObjectTypeSeriesDetector):
     Missing values are not treated as errors.
 
     >>> series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus', np.nan ])
-    >>> detector = series.cleaner.detect.keycollision()
+    >>> detector = series.cleaner.detect.alternatives()
     >>> print(detector.is_error())
     0    False
     1    True
@@ -249,7 +249,7 @@ class keycollision(_ObjectTypeSeriesDetector):
     3    False
     dtype: bool
     """
-    name = 'keycollision'
+    name = 'alternatives'
 
     def __init__(self, obj, detector=None, keys='fingerprint'):
         super().__init__(obj)

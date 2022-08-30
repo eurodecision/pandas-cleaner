@@ -196,7 +196,7 @@ def test_report_web_url_nocheck(capsys, series_with_urls):
 
 def test_report_fingerprint(capsys, cat_series):
     """key collision"""
-    detector = cat_series.cleaner.detect('keycollision')
+    detector = cat_series.cleaner.detect('alternatives')
     detector.report()
     captured = capsys.readouterr()
     assert 'keys                     fingerprint' in captured.out
