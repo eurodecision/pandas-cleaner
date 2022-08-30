@@ -1,10 +1,10 @@
 import pandas as pd
 
 from pdcleaner.utils.utils import add_method
-from pdcleaner.detection.strings import keycollision
+from pdcleaner.detection.strings import alternatives
 
 
-@add_method(keycollision, 'plot')
+@add_method(alternatives, 'plot')
 def plot(self, cmap=None, not_displayed_color='red', nfirst=0, nlast=0, figsize=None):
     """plot a countplot of values frequency grouped by keys, with options to compact the graph
 
@@ -42,22 +42,22 @@ def plot(self, cmap=None, not_displayed_color='red', nfirst=0, nlast=0, figsize=
                                'Bill Gates',
                                'Steve Jobs',
                                ])
-    >>> detector = series.cleaner.detect.keycollision()
+    >>> detector = series.cleaner.detect.alternatives()
     >>> detector.plot()
 
-    .. image:: ../../_static/plot_keycollision_1.png
+    .. image:: ../../_static/plot_alternatives_1.png
 
     Display only the two most frequents
 
     >>> detector.plot(nfirst=2)
 
-    .. image:: ../../_static/plot_keycollision_nfirst_2.png
+    .. image:: ../../_static/plot_alternatives_nfirst_2.png
 
     Display only the least frequent
 
     >>> detector.plot(nlast=1)
 
-    .. image:: ../../_static/plot_keycollision_nlast_1.png
+    .. image:: ../../_static/plot_alternatives_nlast_1.png
     """
 
     if not isinstance(nfirst, int):

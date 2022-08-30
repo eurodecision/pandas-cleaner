@@ -299,14 +299,14 @@ def replace(self, detector, value=None, inplace=False):
     return series.where(detector.not_error(), value, inplace=inplace)
 
 
-def bykeys(self, detector, inplace=False):
+def alternatives(self, detector, inplace=False):
     """
     Clean by merging values that have been identified as alternative representations
     of the same object by a key collision detector.
 
     Note
     ----
-    This method can only applied with a 'keycollision' detector.
+    This method can only applied with a 'alternatives' detector.
 
     Parameters
     ----------
@@ -326,7 +326,7 @@ def bykeys(self, detector, inplace=False):
 
     >>> series = pd.Series(['Linus Torvalds','linus.torvalds','Torvalds, Linus',
     >>>                     'Linus Torvalds', 'Bill Gates'])
-    >>> detector = series.cleaner.detect.keycollision()
+    >>> detector = series.cleaner.detect.alternatives()
     >>> print(detector.is_error())
     0    False
     1     True
@@ -337,7 +337,7 @@ def bykeys(self, detector, inplace=False):
 
     Clean by standardizing
 
-    >>> print(series.cleaner.clean('bykeys', detector))
+    >>> print(series.cleaner.clean('alternatives', detector))
     0    Linus Torvalds
     1    Linus Torvalds
     2    Linus Torvalds

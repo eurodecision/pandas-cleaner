@@ -32,7 +32,7 @@ from pdcleaner.detection.datetimes import *
 # Import plotting methods
 
 from pdcleaner.plots.numseries import *
-from pdcleaner.plots.keycollision import *
+from pdcleaner.plots.alternatives import *
 from pdcleaner.plots.multicategories import *
 from pdcleaner.plots.freqandcount import *
 
@@ -257,7 +257,7 @@ for detector_name in detection_classes:
 
 # Register cleaning functions
 
-list_series_cleaning_methods = ['clip', 'drop', 'to_na', 'replace', 'bykeys', 'cast', 'strip']
+list_series_cleaning_methods = ['clip', 'drop', 'to_na', 'replace', 'alternatives', 'cast', 'strip']
 series_cleaning_methods = {}
 
 for cleaning_member in getmembers(cleaning, isfunction):

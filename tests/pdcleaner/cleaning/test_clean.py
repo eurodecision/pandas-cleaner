@@ -29,7 +29,7 @@ def test_not_a_bounded_detector(cat_series):
 def test_no_keys(cat_series):
     detector = cat_series.cleaner.detect('types', str)
     with pytest.raises(ValueError, match="method does not have a keys dictionary"):
-        cat_series.cleaner.clean('bykeys', detector)
+        cat_series.cleaner.clean('alternatives', detector)
 
 # TestCleanSeries:
 
@@ -71,12 +71,12 @@ def test_to_na_num_col(df_quanti_quali):
     assert_series_equal(df_quanti_quali['num'], expected)
 
 
-# TestBykeys:
+# Testalternatives:
 
 
-def test_bykeys_keycollision(keycol_series):
-    results = keycol_series.cleaner.detect.keycollision()
-    corrected = keycol_series.cleaner.clean('bykeys', results)
+def test_alternatives_alternatives(altern_series):
+    results = altern_series.cleaner.detect.alternatives()
+    corrected = altern_series.cleaner.clean('alternatives', results)
     expected = pd.Series(['Linus Torvalds',
                           'Linus Torvalds',
                           'Linus Torvalds',
@@ -86,30 +86,30 @@ def test_bykeys_keycollision(keycol_series):
     assert_series_equal(corrected, expected)
 
 
-def test_bykeys_keycollision_inplace(keycol_series):
-    results = keycol_series.cleaner.detect.keycollision()
-    keycol_series.cleaner.clean('bykeys', results, inplace=True)
+def test_alternatives_alternatives_inplace(altern_series):
+    results = altern_series.cleaner.detect.alternatives()
+    altern_series.cleaner.clean('alternatives', results, inplace=True)
     expected = pd.Series(['Linus Torvalds',
                           'Linus Torvalds',
                           'Linus Torvalds',
                           'Linus Torvalds',
                           'Bill Gates',
                           ])
-    assert_series_equal(keycol_series, expected)
+    assert_series_equal(altern_series, expected)
 
 
-def test_bykeys_from_existing_detector(keycol_series, keycol_test_series):
-    results = keycol_series.cleaner.detect.keycollision()
-    corrected = keycol_test_series.cleaner.clean('bykeys', results)
+def test_alternatives_from_existing_detector(altern_series, altern_test_series):
+    results = altern_series.cleaner.detect.alternatives()
+    corrected = altern_test_series.cleaner.clean('alternatives', results)
     expected = pd.Series(['Linus Torvalds', 'Bill Gates', ])
     assert_series_equal(corrected, expected)
 
 
-def test_bykeys_from_existing_inplace(keycol_series, keycol_test_series):
-    results = keycol_series.cleaner.detect.keycollision()
-    keycol_test_series.cleaner.clean('bykeys', results, inplace=True)
+def test_alternatives_from_existing_inplace(altern_series, altern_test_series):
+    results = altern_series.cleaner.detect.alternatives()
+    altern_test_series.cleaner.clean('alternatives', results, inplace=True)
     expected = pd.Series(['Linus Torvalds', 'Bill Gates', ])
-    assert_series_equal(keycol_test_series, expected)
+    assert_series_equal(altern_test_series, expected)
 
 
 def test_cast_to_float(series_with_separate_numbers):

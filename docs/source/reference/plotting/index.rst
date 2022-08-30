@@ -6,5 +6,5 @@ Plotting methods
 
    numseries
    freqandcount
-   keycollision
+   alternatives
    multicategories

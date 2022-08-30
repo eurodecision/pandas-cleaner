@@ -133,7 +133,7 @@ def cat_series_with_capital():
 
 
 @pytest.fixture
-def keycol_series():
+def altern_series():
     """Create a categorical series with alternative
     formulations for the same person"""
     return pd.Series(['Linus Torvalds',
@@ -145,7 +145,7 @@ def keycol_series():
 
 
 @pytest.fixture
-def keycol_series_with_nan():
+def altern_series_with_nan():
     """Create a categorical series with alternative
     formulations for the same person and a NaN"""
     return pd.Series(['Linus Torvalds',
@@ -157,15 +157,26 @@ def keycol_series_with_nan():
 
 
 @pytest.fixture
-def keycol_test_series():
+def altern_test_series():
     """Create a categorical series to test on a previously defined detector"""
     return pd.Series(['torvalds LinuS',
                       'Bill Gates'
                       ])
 
+@pytest.fixture
+def altern_series_first():
+    """Categorical series with alternative formulations for the same person.
+    In this case, the first encountered is not the most frequent"""
+    return pd.Series(['Linus Torvalds',
+                    'linus.torvalds',
+                    'Torvalds, Linus',
+                    'Torvalds, Linus',
+                    'Bill Gates',
+                    ])
+
 
 @pytest.fixture
-def keycol_plot_series():
+def altern_plot_series():
     """Create a categorical series to test plotting method"""
     return pd.Series(['Linus Torvalds',
                       'Torvalds, Linus',
