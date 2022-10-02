@@ -41,7 +41,7 @@ def plot(self, color='green', errors_color='red', fmt=".0f"):
 
     .. image:: ../../_static/plot_association.png
     """
-    data = self.obj
+    data = self.obj.copy()
 
     crosstab = pd.crosstab(index=data.iloc[:, 0],
                            columns=[data.iloc[:, 1]]
