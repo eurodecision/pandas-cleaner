@@ -10,7 +10,7 @@ import pandas as pd
 
 from scipy import stats
 
-from pdcleaner.detection.basic import bounded
+from pdcleaner.detection.basic import bounded as _bounded
 from pdcleaner.detection.basic import _raise_if_invalid_sided_or_inclusive_args
 from pdcleaner.utils.utils import raise_if_not_in
 
@@ -41,7 +41,7 @@ def _inverse_yeojohnson(xt: float, lambda_: float = 1) -> float:
     return X
 
 
-class _GaussianSeriesDetector(bounded):
+class _GaussianSeriesDetector(_bounded):
     r"Base class for outliers detection based on a normal/gaussian distribution assumption."
 
     name = 'gaussian'

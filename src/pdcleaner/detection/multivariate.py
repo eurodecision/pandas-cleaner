@@ -6,7 +6,7 @@ import numbers
 
 import pandas as pd
 
-from sklearn.cluster import DBSCAN
+from sklearn.cluster import DBSCAN as _DBSCAN
 
 
 from pdcleaner.detection._base import _QuantiDataFramesDetector
@@ -124,7 +124,7 @@ class outliers(_QuantiDataFramesDetector):
         df_norm.dropna(inplace=True)
 
         try:
-            mask = (DBSCAN(eps=self._eps,
+            mask = (_DBSCAN(eps=self._eps,
                            min_samples=self._min_samples
                            )
                     .fit(df_norm)
