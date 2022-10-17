@@ -1,4 +1,4 @@
-### What's new in 0.0.3 (October 17, 2022)
+### What's new in 0.0.2 (October 17, 2022)
 
 + **New detection methods**
     + `'value'` to detect cells different from a given value
