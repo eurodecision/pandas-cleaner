@@ -1,3 +1,6 @@
+### What's new in 0.0.3 (October 17, 2022)
++ Online documentation https://pandas-cleaner.readthedocs.io/
+
 ### What's new in 0.0.2 (October 17, 2022)
 
 + **New detection methods**
