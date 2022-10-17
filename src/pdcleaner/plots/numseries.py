@@ -1,4 +1,3 @@
-from distutils.log import warn
 import warnings
 
 import numpy as np
