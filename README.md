@@ -1,6 +1,7 @@
 # Pandas-cleaner
 
-<img src=https://img.shields.io/pypi/v/pandas-cleaner.svg target=https://pypi.python.org/pypi/pandas-cleaner> <img src=https://img.shields.io/pypi/l/pandas-cleaner.svg target=https://pypi.python.org/pypi/pandas-cleaner> <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ed-ialifinaritra/74e11571ef9b1a732e44fe9fbbdc7f0b/raw/pdcleaner_coverage.json">
+<img src=https://img.shields.io/pypi/v/pandas-cleaner.svg target=https://pypi.python.org/pypi/pandas-cleaner> <img src=https://img.shields.io/pypi/l/pandas-cleaner.svg target=https://pypi.python.org/pypi/pandas-cleaner> <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ed-ialifinaritra/74e11571ef9b1a732e44fe9fbbdc7f0b/raw/pdcleaner_coverage.json"> [![Documentation Status](https://readthedocs.org/projects/pandas-cleaner/badge/?version=latest)](https://pandas-cleaner.readthedocs.io/en/latest/?badge=latest)
+
 
 Pandas-cleaner is a Python package, built on top of pandas, that provides methods detect, analyze and clean errors in datasets with different types of data (numerical, categorical, text, datetimes...).
 
