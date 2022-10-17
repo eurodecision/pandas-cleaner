@@ -14,8 +14,8 @@ import os
 import sys
 from datetime import date
 
-# sys.path.insert(0, os.path.abspath('../../src'))
-
+sys.path.insert(0, os.path.abspath('../../src'))
+import pdcleaner
 
 # -- Project information -----------------------------------------------------
 
@@ -24,9 +24,9 @@ copyright = f"2021-{date.today().year}, EURODECISION"
 author = 'Renan Hilbert'
 
 # The full version, including alpha/beta/rc tags
-# version = pdcleaner.__version__
-# release = pdcleaner.__version__
-version="0.0.2c"
+version = pdcleaner.__version__
+release = pdcleaner.__version__
+# version="0.0.2c"
 
 # -- General configuration ---------------------------------------------------
 source_suffix = ['.rst', '.md']
