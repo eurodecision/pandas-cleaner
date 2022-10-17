@@ -26,7 +26,7 @@ setuptools.setup(
     url="https://github.com/eurodecision/pandas-cleaner",
     project_urls={
         "Documentation":
-        "https://github.com/eurodecision/pandas-cleaner/blob/master/README.md",
+        "https://pandas-cleaner.readthedocs.io/",
         "Source Code":
         "https://github.com/eurodecision/pandas-cleaner",
         "Bug Tracker":
