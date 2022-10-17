@@ -22,7 +22,7 @@ setuptools.setup(
     author_email="renan.hilbert@eurodecision.com",
     description="A pandas extension for cleaning datasets.",
     long_description=long_description,
-    long_description_content_type="text/x-rst",
+    long_description_content_type='text/markdown',
     url="https://github.com/eurodecision/pandas-cleaner",
     project_urls={
         "Documentation":
