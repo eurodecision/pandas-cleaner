@@ -11,12 +11,10 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-from platform import release
 import sys
 from datetime import date
 
-sys.path.insert(0, os.path.abspath('../../src'))
-import pdcleaner
+# sys.path.insert(0, os.path.abspath('../../src'))
 
 
 # -- Project information -----------------------------------------------------
@@ -26,8 +24,9 @@ copyright = f"2021-{date.today().year}, EURODECISION"
 author = 'Renan Hilbert'
 
 # The full version, including alpha/beta/rc tags
-version = pdcleaner.__version__
-release = pdcleaner.__version__
+# version = pdcleaner.__version__
+# release = pdcleaner.__version__
+version="0.0.2c"
 
 # -- General configuration ---------------------------------------------------
 source_suffix = ['.rst', '.md']
