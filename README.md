@@ -4,19 +4,16 @@
 
 Pandas-cleaner is a Python package, built on top of pandas, that provides methods detect, analyze and clean errors in datasets with different types of data (numerical, categorical, text, datetimes...).
 
-![](https://github.com/eurodecision/pandas-cleaner/blob/master/docs/source/pandas-cleaner.png)
+![](https://raw.githubusercontent.com/eurodecision/pandas-cleaner/master/docs/source/pandas-cleaner.png)
 
 ## Features
 
 Pandas-cleaner offers functionnalities to automatically :
 
-:arrow_right: **detect** different kind of potential errors in datasets such as outliers, inconsistencies, typos, wrong-typed ..., given predefined rules or statistiscal estimations,  via an easy-to-use API extending pandas,
-
-:arrow_right: **analyze** these errors, via reports and plots, to check the validity of the set and/or decide if any correction is needed,
-
-:arrow_right: **clean** the datasets, either by dropping the lines with errors, emptying, correcting or replacing bad values,
-
-:arrow_right: **reapply** the same rules to any other incoming fresh data.
++ **detect** different kind of potential errors in datasets such as outliers, inconsistencies, typos, wrong-typed ..., given predefined rules or statistiscal estimations,  via an easy-to-use API extending pandas,
++ **analyze** these errors, via reports and plots, to check the validity of the set and/or decide if any correction is needed,
++ **clean** the datasets, either by dropping the lines with errors, emptying, correcting or replacing bad values,
++ **reapply** the same rules to any other incoming fresh data.
 
 ## Usage
 
