@@ -1,6 +1,0 @@
-sphinx
-m2r2
-pydata-sphinx-theme
-sphinx-copybutton
-nbsphinx
-sphinx-automodapi
