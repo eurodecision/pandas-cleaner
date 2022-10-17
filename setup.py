@@ -3,7 +3,7 @@ import re
 
 # c.f. https://packaging.python.org/tutorials/packaging-projects/
 
-with open("README.rst", "r", encoding="utf-8") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 VERSIONFILE = "src/pdcleaner/__version__.py"
@@ -26,7 +26,7 @@ setuptools.setup(
     url="https://github.com/eurodecision/pandas-cleaner",
     project_urls={
         "Documentation":
-        "https://github.com/eurodecision/pandas-cleaner/blob/master/README.rst",
+        "https://github.com/eurodecision/pandas-cleaner/blob/master/README.md",
         "Source Code":
         "https://github.com/eurodecision/pandas-cleaner",
         "Bug Tracker":
