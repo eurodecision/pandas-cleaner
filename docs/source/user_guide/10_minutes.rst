@@ -135,7 +135,7 @@ detected errors.
 
 .. code:: ipython3
 
-    detector.detected
+    detector.detected()
 
 
 
@@ -340,7 +340,7 @@ This detects the following problematic lines :
 
 .. code:: ipython3
 
-    detector2.detected
+    detector2.detected()
 
 
 

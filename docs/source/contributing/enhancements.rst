@@ -1,3 +1,0 @@
-Enhancement requests
-====================
-

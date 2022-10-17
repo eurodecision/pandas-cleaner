@@ -35,14 +35,17 @@ source_suffix = ['.rst', '.md']
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc",
-              'sphinx.ext.napoleon',  # handle numpy & google style docstrings
-              'sphinx.ext.coverage',
-              "m2r2",  # md to rst
-              "sphinx_copybutton",
-              "sphinx_automodapi.automodapi",
-              "sphinx.ext.mathjax",
-              ]
+extensions = [
+    "sphinx.ext.autodoc",
+    'sphinx.ext.napoleon',  # handle numpy & google style docstrings
+    'sphinx.ext.coverage',
+    "m2r2",  # md to rst
+    "sphinx_copybutton",
+    "sphinx_automodapi.automodapi",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.viewcode",
+]
 
 numpydoc_show_class_members = False
 automodsumm_inherited_members = True
@@ -69,17 +72,32 @@ html_theme = "pydata_sphinx_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_logo = "_static/logo_pandas-cleaner.svg"
-html_favicon = "_static/favicon.ico"
+html_logo = "_static/pandas-cleaner.png"
+html_favicon = "_static/favicon.png"
 
 html_theme_options = {
     "icon_links": [
             {
-                "name": "GitLab",
-                "url": "https://edgitlab.eurodecision.com/data/pandas-cleaner",
-                "icon": "fab fa-gitlab",
+                "name": "Github",
+                "url": "https://github.com/eurodecision/pandas-cleaner",
+                "icon": "fab fa-github",
+            },
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/project/pandas-cleaner/",
+                "icon": "fas fa-box",
+            },
+            {
+                "name": "EURODECISION",
+                "url": "https://eurodecision.com",
+                "icon": "_static/logo_ed_star.png",
+                "type": "local"
             },
         ],
+    "logo": {
+      "image_light": "pandas-cleaner.png",
+      "image_dark": "pandas-cleaner-dark.png",
+    }
 }
 
 html_sidebars = {

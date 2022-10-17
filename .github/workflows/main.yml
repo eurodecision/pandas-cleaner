@@ -31,9 +31,29 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+    - name: Install python package
+      run: |
+        python setup.py develop
+
     - name: Test with pytest
       run: |
         pytest
+
+    - name: Get Coverage for badge
+      run: |
+        SUMMARY="$(pytest --cov --cov-report term-missing | tail -3 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKENS[-1]})" >> $GITHUB_ENV
+
+    - name: Create the Badge
+      uses: schneegans/dynamic-badges-action@v1.4.0
+      with:
+        auth: ${{ secrets.GIST_TOKEN }}
+        gistID: 74e11571ef9b1a732e44fe9fbbdc7f0b
+        filename: pdcleaner_coverage.json
+        label: Test Coverage
+        message: ${{ env.COVERAGE }}
+        color: green
 
     - name: Build python package
       run: |

@@ -2,6 +2,7 @@
 .vscode/
 .ipynb_checkpoints/
 .idea/
+.pytest_cache/
 
 #compiled sources
 *.py[ocd]

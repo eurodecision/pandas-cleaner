@@ -3,10 +3,10 @@ import re
 
 # c.f. https://packaging.python.org/tutorials/packaging-projects/
 
-with open("README.rst", "r", encoding="utf-8") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-VERSIONFILE = "pdcleaner/__version__.py"
+VERSIONFILE = "src/pdcleaner/__version__.py"
 verstrline = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
 mo = re.search(VSRE, verstrline, re.M)
@@ -26,7 +26,7 @@ setuptools.setup(
     url="https://github.com/eurodecision/pandas-cleaner",
     project_urls={
         "Documentation":
-        "https://github.com/eurodecision/pandas-cleaner/blob/master/README.rst",
+        "https://github.com/eurodecision/pandas-cleaner/blob/master/README.md",
         "Source Code":
         "https://github.com/eurodecision/pandas-cleaner",
         "Bug Tracker":
@@ -43,7 +43,8 @@ setuptools.setup(
         "Topic :: Scientific/Engineering",
     ],
 
-    packages=setuptools.find_packages(where="."),
+    packages=setuptools.find_packages(where="src"),
+    package_dir={"":"src"},
     python_requires=">=3.6",
     setup_requires=["wheel"],
     install_requires=[

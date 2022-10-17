@@ -96,8 +96,3 @@ Clean the detected errors from the series using the chosen method among `drop`, 
    reference/index
    contributing/index
    release/index
-
-Project's home page
--------------------
-
-You can visit the `project's home page <https://edgitlab.eurodecision.com/data/pandas-cleaner>`_.
