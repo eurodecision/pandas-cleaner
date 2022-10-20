@@ -7,6 +7,12 @@ Pandas-cleaner is a Python package, built on top of pandas, that provides method
 
 ![](https://raw.githubusercontent.com/eurodecision/pandas-cleaner/master/docs/source/pandas-cleaner.png)
 
+## Installation
+
+```bash
+pip install pandas-cleaner
+```
+
 ## Features
 
 Pandas-cleaner offers functionnalities to automatically :
